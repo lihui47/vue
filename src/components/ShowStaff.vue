@@ -46,7 +46,6 @@
       width="400">
       <template slot-scope="scope">
         <el-button @click="handleClick(scope.row)" size="small" type="primary" icon="el-icon-delete">删除</el-button>
-
       </template>
     </el-table-column>
   </el-table>

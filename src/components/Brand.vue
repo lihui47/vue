@@ -3,7 +3,7 @@
   <!--网页抬头部分-->
   <div id="top_parent_id1">
     <div id="top_child_id1">
-        <img src="../assets/搜索.png" width="100%">     
+        <img src="../assets/搜索.png" width="30px">     
     </div>
     <div id="top_child_id2">      
         <span>筛选查询</span>
@@ -71,12 +71,6 @@
     width="30%"
     :before-close="handleClose">
     <form>
-       编码:<input type="text" ><br>
-       <br>
-       品牌名称:<input type="text"><br>
-       <br>
-       品牌首字母:<input type="text"><br>
-       <br>
        <el-button @click="dialogVisible = false">取 消</el-button>
        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
     </form>
@@ -88,12 +82,6 @@
     width="30%"
     :before-close="handleClose">
     <form>
-       编码:<input type="text" ><br>
-       <br>
-       品牌名称:<input type="text"><br>
-       <br>
-       品牌首字母:<input type="text"><br>
-       <br>
        <el-button @click="insertVisible  = false">取 消</el-button>
        <el-button type="primary" @click="insertVisible  = false">确 定</el-button>
     </form>
@@ -136,44 +124,49 @@
        width: 100%;
        height: 50px;
        background-color:whitesmoke;
+       float: left;
+       box-sizing: border-box;
    }
    #top_child_id1{
         border: 0px red solid;
-        width: 30px;
-        height: 30px;
-        margin: 10px 0 0 0px;
+        width: 50px;
+        height: 50px;
         float: left;
+        text-align: center;
+        line-height: 50px;
+        box-sizing: border-box;
    }
     #top_child_id2{
         border: 0px red solid;
         width: 80px;
         height: 50px;
-        margin: 0px 0 0 0px;
         float: left;
         text-align: center;
         line-height: 50px;
         box-sizing: border-box;
-        font: 14px;
+        font-size: 14px;
    }
    #top_child_id3{
         border:0px red solid;
-        width: 400px;
+        width: 300px;
         height: 50px;
         float: left;
         box-sizing: border-box;
-        padding-top: 15px;
-        margin-left: 650px;
+        padding-top: 0px;
+        margin-left: 550px;
         font-size: 14px;
+        line-height: 50px;
       
    }
     .top_child_cls4{
         border: 0px red solid;
-        width: 80px;
+        width: 100px;
         height: 50px;
         float: left;
-        padding-top: 10px;
+        padding-top: 0px;
         box-sizing: border-box;
         font-size: 14px;
+        line-height: 50px;
    }
    
 
