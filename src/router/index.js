@@ -6,6 +6,7 @@ import CheckStaff from "../components/CheckStaff";
 import ShowStaff from "../components/ShowStaff";
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import ProductList from "../components/Product-list";
 
 
 Vue.use(Router)
@@ -27,7 +28,11 @@ export default new Router({
     {
       path: '/showStaff',
       component:ShowStaff
-    }
+    },
+    {
+      path:"/ProductList",
+      component:ProductList
+    },
 
   ]
 })
