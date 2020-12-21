@@ -11,7 +11,7 @@ import ShowStaff from "../components/ShowStaff";
 //vue框架引入
 import axios from 'axios';//导入axios
 import ElementUI from 'element-ui';//导入elementui
-import 'element-ui/lib/theme-chalk/index.css';
+import 'element-ui/lib/theme-chalk/index.css';//导入elementui
 Vue.prototype.$http=axios;
 Vue.use(Router);
 Vue.use(ElementUI);
