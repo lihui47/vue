@@ -3,7 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import axios from 'axios'
 
+
+Vue.prototype.$http=axios;   //替换vue提供的异步组件
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
