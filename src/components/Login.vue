@@ -19,7 +19,7 @@
     <el-row >
       <el-checkbox-group v-model="checkList">
         <el-checkbox label="记住密码 | " style="margin-right: 20px"></el-checkbox>
-        <el-button type="info"  round>登陆</el-button>
+        <el-button type="info"  round @click="login">登陆</el-button>
       </el-checkbox-group>
     </el-row>
 
@@ -37,6 +37,32 @@
 
 <script>
 export default {
+  methods:{
+    // 登录方法
+    login(){
+      const _this=this;
+      this.$http.get("http://localhost:9090/user/login",{
+        params:{
+          username:_this.ruleForm.username,
+          password:_this.ruleForm.password
+        }
+      }).then((resp) => {
+        console.log(resp)
+        if(resp.data.code==20000){
+          this.$message({
+            message: '恭喜你，登陆成功',
+            type: 'success'
+          });
+        }else if(resp.data.code==20002){
+          _this.$router.push("/register")
+        }else{
+
+        }
+
+      })
+
+    }
+  },
   data() {
     return {
       ruleForm: {
