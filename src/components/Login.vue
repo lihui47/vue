@@ -41,7 +41,6 @@ export default {
     // 登录方法
     login(){
       const _this=this;
-      alert("dsfsds")
       this.$http.get("http://localhost:9090/user/login",{
         params:{
           username:_this.ruleForm.username,
