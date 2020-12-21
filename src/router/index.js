@@ -13,6 +13,10 @@ Vue.use(ElementUI);
 export default new Router({
   routes: [
     {
+      path: '/',
+      redirect:"index"
+    },
+    {
       path: '/login',
       component:Login
     },
