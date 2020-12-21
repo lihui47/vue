@@ -40,10 +40,28 @@ export default {
   methods:{
     // 登录方法
     login(){
-      this.$message({
-        message: '恭喜你，登陆成功',
-        type: 'success'
-      });
+      const _this=this;
+      alert("dsfsds")
+      this.$http.get("http://localhost:9090/user/login",{
+        params:{
+          username:_this.ruleForm.username,
+          password:_this.ruleForm.password
+        }
+      }).then((resp) => {
+        console.log(resp)
+        if(resp.data.code==20000){
+          this.$message({
+            message: '恭喜你，登陆成功',
+            type: 'success'
+          });
+        }else if(resp.data.code==20002){
+          _this.$router.push("/register")
+        }else{
+
+        }
+
+      })
+
     }
   },
   data() {
