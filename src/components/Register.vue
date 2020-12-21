@@ -5,7 +5,7 @@
       <h1></h1>
       <form style="background: ghostwhite;height: 350px;border-radius: 5%" >
         <br>
-        <h2>注册</h2>
+        <h2>登陆</h2>
         <br>
         <el-col offset="2" :span="18" >
           <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
@@ -15,16 +15,16 @@
             <el-form-item label="密码" prop="password" >
               <el-input v-model="ruleForm.password" placeholder="请输入密码" show-password ></el-input>
             </el-form-item>
-            <el-col   >
+            <el-col  offset="4" >
               <el-row >
                 <el-checkbox-group v-model="checkList">
-                  <el-button type="info"  round>立即注册</el-button>
+                  <el-button type="info"  round>注册</el-button>
                 </el-checkbox-group>
               </el-row>
 
             </el-col>
             <el-col>
-              <el-divider ><el-link href="/login" target="_blank">已注册，去登陆</el-link></el-divider>
+              <el-divider ><el-link href="/login" target="_blank">去登陆</el-link></el-divider>
             </el-col>
           </el-form>
         </el-col>
