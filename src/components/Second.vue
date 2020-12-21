@@ -3,23 +3,35 @@
   <!--网页抬头部分-->
   <div id="top_parent_id1">
     <div id="top_child_id1">
-        <img src="../assets/搜索.png" width="100%">     
+        <img src="../assets/搜索.png" width="100%">
     </div>
-    <div id="top_child_id2">      
+    <div id="top_child_id2">
         <span>筛选查询</span>
+    </div>
+    <div id="top_child_id2_1">
+        <el-dropdown >
+            <span class="el-dropdown-link">
+                大类筛选<i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>服装类</el-dropdown-item>
+                <el-dropdown-item >电器类</el-dropdown-item>
+                <el-dropdown-item divided>皮包类</el-dropdown-item>
+            </el-dropdown-menu>
+        </el-dropdown>
     </div>
     <div id="top_child_id3">
         <span>模糊条件</span>
-        <input type="text" placeholder="请输入商品大类名称">
+        <input type="text" placeholder="请输入商品小类名称">
     </div>
-    <div class="top_child_cls4">  
-         <el-button type="info" size="small">查询</el-button>     
+    <div class="top_child_cls4">
+         <el-button type="info" size="small">查询</el-button>
     </div>
-    <div class="top_child_cls4">  
-        <el-button type="info" size="small" @click="insertVisible = true">新增 </el-button>     
+    <div class="top_child_cls4">
+        <el-button type="info" size="small" @click="insertVisible = true">新增 </el-button>
     </div>
   </div>
-  <!--表格部分-->
+  <!--网页表格部分-->
   <el-table
     :data="tableData"
     border
@@ -27,33 +39,45 @@
     <el-table-column
       fixed
       prop="date"
-      label="大类编号"
-      width="350">
+      label="编号"
+      width="300">
     </el-table-column>
      <el-table-column
       fixed
       prop="name"
-      label="大类名称"
-      width="350">
+      label="分类名称"
+      width="300">
     </el-table-column>
      <el-table-column
       fixed
-      prop="other"
-      label="备注"
-      width="450">
+      prop="fisetName"
+      label="所属大类"
+      width="350">
     </el-table-column>
-    
+    <el-table-column
+      fixed
+      prop="levle"
+      label="级别"
+      width="150">
+    </el-table-column>
+    <el-table-column
+      fixed
+      prop="danwei"
+      label="单位"
+      width="150">
+    </el-table-column>
+
     <el-table-column
       fixed="right"
       label="操作"
-      width="300">
-      <template >
-        <el-button  size="medium">删除</el-button>
-        <el-button  size="medium"  @click="dialogVisible = true">修改</el-button>
+      width="200">
+      <template slot-scope="scope">
+        <el-button @click="handleClick(scope.row)" size="medium">删除</el-button>
+        <el-button size="medium" @click="dialogVisible = true"  >修改</el-button>
       </template>
     </el-table-column>
   </el-table>
-  <!--分页部分-->
+   <!--分页部分-->
   <div class="block">
     <el-pagination
       @size-change="handleSizeChange"
@@ -66,16 +90,16 @@
   </div>
   <!--修改弹出框-->
   <el-dialog
-    title="修改商品大类"
+    title="修改商品小类"
     :visible.sync="dialogVisible"
     width="30%"
     :before-close="handleClose">
     <form>
-       大类的编码:<input type="text" ><br>
+       小类的编码:<input type="text" ><br>
        <br>
-       大类的名称:<input type="text"><br>
+       小类的名称:<input type="text"><br>
        <br>
-       备注信息:<input type="text"><br>
+       所属大类:<input type="text"><br>
        <br>
        <el-button @click="dialogVisible = false">取 消</el-button>
        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
@@ -83,16 +107,20 @@
   </el-dialog>
   <!--新增弹出框-->
    <el-dialog
-    title="新增商品大类"
+    title="新增商品小类"
     :visible.sync="insertVisible "
     width="30%"
     :before-close="handleClose">
     <form>
-       大类的编码:<input type="text" ><br>
+       小类的编码:<input type="text" ><br>
        <br>
-       大类的名称:<input type="text"><br>
+       小类的名称:<input type="text"><br>
        <br>
-       备注信息:<input type="text"><br>
+       所属大类:<input type="text"><br>
+       <br>
+       级别:<input type="text"><br>
+       <br>
+       单位:<input type="text"><br>
        <br>
        <el-button @click="insertVisible  = false">取 消</el-button>
        <el-button type="primary" @click="insertVisible  = false">确 定</el-button>
@@ -103,7 +131,6 @@
 
 <script>
   export default {
-
     methods: {
       handleClick(row) {
         console.log(row);
@@ -121,8 +148,10 @@
       return {
         tableData: [{
           date: '1',
-          name: '服装类',
-          other: '' 
+          name: '大衣',
+          fisetName: '服装类',
+          levle:"二级",
+          danwei:"个"
         }],
         dialogVisible: false,
         insertVisible:false
@@ -132,6 +161,13 @@
 </script>
 
 <style>
+    .el-dropdown-link {
+        cursor: pointer;
+        color: #666666;
+    }
+    .el-icon-arrow-down {
+        font-size: 12px;
+    }
    #top_parent_id1{
        border: 0px red solid;
        width: 100%;
@@ -145,6 +181,13 @@
         margin: 10px 0 0 0px;
         float: left;
    }
+   #top_child_id2_1{
+        border: 0px red solid;
+        width: 80px;
+        height: 30px;
+        margin: 15px 0 0 0px;
+        float: left;
+   }
     #top_child_id2{
         border: 0px red solid;
         width: 80px;
@@ -154,7 +197,7 @@
         text-align: center;
         line-height: 50px;
         box-sizing: border-box;
-        font: 14px;
+        font-size: 14px;
    }
    #top_child_id3{
         border:0px red solid;
@@ -165,7 +208,7 @@
         padding-top: 15px;
         margin-left: 650px;
         font-size: 14px;
-      
+
    }
     .top_child_cls4{
         border: 0px red solid;
@@ -176,6 +219,6 @@
         box-sizing: border-box;
         font-size: 14px;
    }
-   
+
 
 </style>

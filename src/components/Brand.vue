@@ -10,7 +10,7 @@
     </div>
     <div id="top_child_id3">
         <span>模糊条件</span>
-        <input type="text" placeholder="请输入商品大类名称">
+        <input type="text" placeholder="请输入品牌名称">
     </div>
     <div class="top_child_cls4">  
          <el-button type="info" size="small">查询</el-button>     
@@ -27,19 +27,19 @@
     <el-table-column
       fixed
       prop="date"
-      label="大类编号"
+      label="编号"
       width="350">
     </el-table-column>
      <el-table-column
       fixed
       prop="name"
-      label="大类名称"
+      label="品牌名称"
       width="350">
     </el-table-column>
      <el-table-column
       fixed
       prop="other"
-      label="备注"
+      label="品牌首字母"
       width="450">
     </el-table-column>
     
@@ -47,9 +47,9 @@
       fixed="right"
       label="操作"
       width="300">
-      <template >
-        <el-button  size="medium">删除</el-button>
-        <el-button  size="medium"  @click="dialogVisible = true">修改</el-button>
+      <template slot-scope="scope">
+        <el-button @click="handleClick(scope.row)"  size="medium">删除</el-button>
+        <el-button  size="medium" @click="dialogVisible = true">修改</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -66,16 +66,16 @@
   </div>
   <!--修改弹出框-->
   <el-dialog
-    title="修改商品大类"
+    title="修改品牌信息"
     :visible.sync="dialogVisible"
     width="30%"
     :before-close="handleClose">
     <form>
-       大类的编码:<input type="text" ><br>
+       编码:<input type="text" ><br>
        <br>
-       大类的名称:<input type="text"><br>
+       品牌名称:<input type="text"><br>
        <br>
-       备注信息:<input type="text"><br>
+       品牌首字母:<input type="text"><br>
        <br>
        <el-button @click="dialogVisible = false">取 消</el-button>
        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
@@ -83,16 +83,16 @@
   </el-dialog>
   <!--新增弹出框-->
    <el-dialog
-    title="新增商品大类"
+    title="新增品牌信息"
     :visible.sync="insertVisible "
     width="30%"
     :before-close="handleClose">
     <form>
-       大类的编码:<input type="text" ><br>
+       编码:<input type="text" ><br>
        <br>
-       大类的名称:<input type="text"><br>
+       品牌名称:<input type="text"><br>
        <br>
-       备注信息:<input type="text"><br>
+       品牌首字母:<input type="text"><br>
        <br>
        <el-button @click="insertVisible  = false">取 消</el-button>
        <el-button type="primary" @click="insertVisible  = false">确 定</el-button>
@@ -103,7 +103,6 @@
 
 <script>
   export default {
-
     methods: {
       handleClick(row) {
         console.log(row);
@@ -121,8 +120,8 @@
       return {
         tableData: [{
           date: '1',
-          name: '服装类',
-          other: '' 
+          name: '古驰',
+          other: 'GC'  
         }],
         dialogVisible: false,
         insertVisible:false
