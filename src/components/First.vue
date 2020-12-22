@@ -5,24 +5,25 @@
     <div id="top_child_id1">
          <img src="../assets/搜索.png" width="30px">
     </div>
-    <div id="top_child_id2">
+    <div id="top_child_id2">      
         <span>筛选查询</span>
     </div>
     <div id="top_child_id3">
         <span>模糊条件</span>
         <input type="text" placeholder="请输入商品大类名称">
     </div>
-    <div class="top_child_cls4">
-         <el-button type="info" size="small">查询</el-button>
+    <div class="top_child_cls4">  
+         <el-button type="info" size="small">查询</el-button>     
     </div>
-    <div class="top_child_cls4">
-        <el-button type="info" size="small" @click="insertVisible = true">新增 </el-button>
+    <div class="top_child_cls4">  
+        <el-button type="info" size="small" @click="insertVisible = true">新增 </el-button>     
     </div>
   </div>
-  <!--一级大类表格部分-->
-  <el-tabl    :data="tableData"
+  <!--表格部分-->
+  <el-table
+    :data="tableData"
     border
-    style="width: 100%;margin-top: 30px">
+    style="width: 100%, margin-top: 30px">
     <el-table-column
       fixed
       prop="date"
@@ -41,7 +42,7 @@
       label="备注"
       width="450">
     </el-table-column>
-
+    
     <el-table-column
       fixed="right"
       label="操作"
@@ -98,7 +99,21 @@
             done();
           })
           .catch(_ => {});
+      },
+      showFirstInfo(){
+        var _this=this;
+        this.$http.get("http://127.0.0.1:9999/first/queryFirst",
+          {
+            params:{
+                 
+            }
+        }).then(function(data){
+          console.log(data);
+        });
       }
+    },
+    created(){
+         this.showFirstInfo();
     },
 
     data() {
@@ -106,7 +121,7 @@
         tableData: [{
           date: '1',
           name: '服装类',
-          other: ''
+          other: '' 
         }],
         dialogVisible: false,
         insertVisible:false
@@ -153,7 +168,7 @@
         margin-left: 550px;
         font-size: 14px;
         line-height: 50px;
-
+      
    }
     .top_child_cls4{
         border: 0px red solid;
@@ -165,6 +180,6 @@
         font-size: 14px;
         line-height: 50px;
    }
-
+   
 
 </style>
