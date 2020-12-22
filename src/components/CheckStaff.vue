@@ -64,7 +64,7 @@ export default {
     //模糊查询
     search(select,input3){
       const _this=this
-      this.$http.get("http://localhost:9090/check/blurSelect",{
+      this.$http.get("http://localhost:8888/check/blurSelect",{
           params:{
             select:select,
             input3:input3
@@ -83,7 +83,7 @@ export default {
       this.$alert('确认通过吗', '通过', {
         confirmButtonText: '确定',
         callback: action => {
-          this.$http.get("http://localhost:9090/check/checkUser/",{
+          this.$http.get("http://localhost:8888/check/checkUser/",{
             params:{
               id:row.id,
               username:row.username,
@@ -106,7 +106,7 @@ export default {
       this.$alert('确认驳回吗', '驳回', {
         confirmButtonText: '确定',
         callback: action => {
-          this.$http.get("http://localhost:9090/check/reject/", {
+          this.$http.get("http://localhost:8888/check/reject/", {
               params: {
                 id: row.id,
                 username: row.username,

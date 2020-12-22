@@ -67,7 +67,7 @@ export default {
     //模糊查询
     search(select,input3){
       const _this=this
-      this.$http.get("http://localhost:9090/check/blurSelect",{
+      this.$http.get("http://localhost:8888/check/blurSelect",{
           params:{
             select:select,
             input3:input3
@@ -91,7 +91,7 @@ export default {
     findAll(size,current){
       console.log(size)
       const _this=this
-      this.$http.get("http://localhost:9090/check/AllUser",{
+      this.$http.get("http://localhost:8888/check/AllUser",{
         params:{
           size:size,
           current:current
@@ -109,7 +109,7 @@ export default {
       this.$alert('确认删除吗', '删除', {
         confirmButtonText: '确定',
         callback: action => {
-          this.$http.get("http://localhost:9090/check/deleteUser", {
+          this.$http.get("http://localhost:8888/check/deleteUser", {
               params: {
                 id:row.id
               }
