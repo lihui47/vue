@@ -6,18 +6,18 @@
     <el-breadcrumb-item>用户管理</el-breadcrumb-item>
     <el-breadcrumb-item>审核用户</el-breadcrumb-item>
   </el-breadcrumb>
-  <div style="margin-top: 15px;">
+  <div >
 
       <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
         <el-select v-model="select" slot="prepend" placeholder="请选择">
           <el-option label="状态" value="1"></el-option>
           <el-option label="姓名" value="2"></el-option>
-
+          <el-option label="编号" value="3"></el-option>
         </el-select>
-        <el-button slot="append" icon="el-icon-search"></el-button>
+        <el-button slot="append" icon="el-icon-search" @click="search(select,input3)"></el-button>
       </el-input>
   </div>
-  <br><br><br>
+
   <!--检查用户-->
   <el-table
     :data="tableData"
@@ -45,11 +45,14 @@
       label="操作"
       width="400px">
       <template slot-scope="scope">
-        <el-button @click="handleClick(scope.row)" type="text" size="small">通过</el-button>
-        <el-button @click="handleClick1(scope.row)" type="text" size="small">驳回</el-button>
+        <el-button @click="handleClick(scope.$index, scope.row,tableData)" type="text" size="small">通过</el-button>
+        <el-button @click="handleClick1(scope.$index, scope.row,tableData)" type="text" size="small">驳回</el-button>
       </template>
     </el-table-column>
   </el-table>
+
+
+
 </div>
 
 </template>
@@ -57,50 +60,95 @@
 <script>
 export default {
   methods: {
-    handleClick(row) {
+
+    //模糊查询
+    search(select,input3){
+      const _this=this
+      this.$http.get("http://localhost:9090/check/blurSelect",{
+          params:{
+            select:select,
+            input3:input3
+          }
+        }
+      ).then((resp) => {
+
+        _this.tableData=resp.data.data;
+
+      })
+
+
+    },
+    handleClick(index, row, rows) {
+      const _this=this;
       this.$alert('确认通过吗', '通过', {
         confirmButtonText: '确定',
-
         callback: action => {
-          this.$message({
-            type: 'info',
-            message: `已通过`
-          });
+          this.$http.get("http://localhost:9090/check/checkUser/",{
+            params:{
+              id:row.id,
+              username:row.username,
+              status:row.status
+            }
+            }
+          ).then((resp) => {
+            rows.splice(index, 1);
+            this.$message({
+              type: 'info',
+              message: `已通过`
+            });
+
+          })
+
         }
       });
     },
-    handleClick1(row) {
+    handleClick1(index, row, rows) {
       this.$alert('确认驳回吗', '驳回', {
         confirmButtonText: '确定',
         callback: action => {
-          this.$message({
-            type: 'info',
-            message: `已驳回`
-          });
+          this.$http.get("http://localhost:9090/check/reject/", {
+              params: {
+                id: row.id,
+                username: row.username,
+                status: row.status
+              }
+            }
+          ).then((resp) => {
+            rows.splice(index, 1);
+            this.$message({
+              type: 'info',
+              message: `已驳回`
+            });
+
+          })
+
         }
       });
     }
+    },
+  created() {
+    const _this=this;
+    this.$http.get("http://localhost:9090/check/showCheck"
+    ).then((resp) => {
+      _this.tableData=resp.data.data;
+
+    })
   },
   data() {
     return {
       tableData: [{
-        id: 1,
-        username: '王小虎',
-        status: '已申请',
-      },
-        {
-          id: 1,
-          username: '王小虎',
-          status: '已申请',
-        },
-        {
-          id: 1,
-          username: '王小虎',
-          status: '已申请',
-        }
+        id: '',
+        username: '',
+        status: '',
+      }
       ],
       input3:'',
-      select:''
+      select:'',
+      currentPage1: 5,
+      currentPage2: 5,
+      currentPage3: 5,
+      currentPage4: 4
+
     }
   }
 
