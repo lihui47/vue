@@ -65,10 +65,9 @@
         <!--点击新增删除事件-->
         <div id="tables-btn">
           <el-row>
-            <el-button>新商品</el-button>
+
             <el-button type="primary">提交</el-button>
-            <el-button type="success">修改</el-button>
-            <el-button type="info">删除</el-button>
+            <el-button type="info">新商品</el-button>
             <el-button type="warning">评估</el-button>
             <el-button type="danger">鉴定</el-button>
           </el-row>
@@ -84,39 +83,36 @@
         tooltip-effect="dark"
         style="width: 100%"
         @selection-change="handleSelectionChange">
-        <el-table-column
-          type="selection"
-          width="55">
-        </el-table-column>
+
         <el-table-column
           prop="number"
           label="编号"
-          width="120">
+          width="80">
         </el-table-column>
         <el-table-column
           prop="name"
           label="商品名称"
-          width="120">
+          width="250">
         </el-table-column>
         <el-table-column
           prop="address"
           label="分类"
-          show-overflow-tooltip>
+          width="250">
         </el-table-column>
         <el-table-column
           prop="author"
           label="录入人"
-          show-overflow-tooltip>
+          width="120">
         </el-table-column>
         <el-table-column
           prop="authenticate"
           label="鉴定人"
-          show-overflow-tooltip>
+          width="120">
         </el-table-column>
         <el-table-column
           prop="assess"
           label="评估人"
-          show-overflow-tooltip>
+          width="120">
         </el-table-column>
         <el-table-column
           prop="time"
@@ -126,7 +122,16 @@
         <el-table-column
           prop="status"
           label="状态"
-          show-overflow-tooltip>
+          width="80">
+        </el-table-column>
+        <el-table-column
+          fixed="right"
+          label="操作"
+          width="250">
+          <template >
+            <el-button  size="medium">删除</el-button>
+            <el-button  size="medium"  @click="dialogVisible = true">修改</el-button>
+          </template>
         </el-table-column>
       </el-table>
       <!--分页-->
@@ -153,13 +158,13 @@
                 checked: true,
                 tableData: [{
                   number: '001',
-                  name: '王小虎',
+                  name: '旺仔小馒头',
                   address: '上海市普陀区金沙江路 1518 弄',
                   author:"张三",
                   authenticate:"李四",
                   assess:"王麻子",
                   time:"",
-                  status:"",
+                  status:"启用",
                 }],
 
               }

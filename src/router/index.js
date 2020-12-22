@@ -1,11 +1,7 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import Vue from 'vue'
+import Router from 'vue-router'
 import Login from "../components/Login";
 import Register from "../components/Register";
-import Frist from "../components/First";
-import Second from "../components/Second";
-import Brand from "../components/Brand";
-import Index from "../components/Index";
 import CheckStaff from "../components/CheckStaff";
 import ShowStaff from "../components/ShowStaff";
 //vue框架引入
@@ -38,5 +34,6 @@ export default new Router({
         {path:'showStaff',component:ShowStaff}
       ]
     }
+
   ]
 })
