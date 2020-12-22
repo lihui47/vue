@@ -1,5 +1,6 @@
 <template>
 <div>
+  <!--登录页面-->
   <el-col :span="8" offset="8">
     <h1>广沣共享典当管理平台</h1><br/>
    <h1></h1>

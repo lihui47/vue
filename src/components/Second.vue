@@ -3,9 +3,9 @@
   <!--网页抬头部分-->
   <div id="top_parent_id1">
     <div id="top_child_id1">
-        <img src="../assets/搜索.png" width="30px">     
+        <img src="../assets/搜索.png" width="30px">
     </div>
-    <div id="top_child_id2">      
+    <div id="top_child_id2">
         <span>筛选查询</span>
     </div>
     <div id="top_child_id2_1">
@@ -19,21 +19,21 @@
                 <el-dropdown-item divided>皮包类</el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
-    </div>   
+    </div>
     <div id="top_child_id3">
         <span>模糊条件</span>
         <input type="text" placeholder="请输入商品小类名称">
     </div>
-    <div class="top_child_cls4">  
-         <el-button type="info" size="small">查询</el-button>     
+    <div class="top_child_cls4">
+         <el-button type="info" size="small">查询</el-button>
     </div>
-    <div class="top_child_cls4">  
-        <el-button type="info" size="small" @click="insertVisible = true">新增 </el-button>     
+    <div class="top_child_cls4">
+        <el-button type="info" size="small" @click="insertVisible = true">新增 </el-button>
     </div>
   </div>
-  <!--网页表格部分-->
+  <!--二级目录网页表格部分-->
   <el-table
-    :data="tableData"
+    ata="tableData"
     border
     style="width: 100%, margin-top: 30px">
     <el-table-column
@@ -66,7 +66,7 @@
       label="单位"
       width="150">
     </el-table-column>
-    
+
     <el-table-column
       fixed="right"
       label="操作"
@@ -147,10 +147,10 @@
 <style>
     .el-dropdown-link {
         cursor: pointer;
-        color: #666666;    
+        color: #666666;
     }
     .el-icon-arrow-down {
-        font-size: 12px; 
+        font-size: 12px;
     }
    #top_parent_id1{
        border: 0px red solid;
@@ -192,7 +192,7 @@
         padding-top: 0px;
         margin-left: 350px;
         font-size: 14px;
-      
+
    }
     .top_child_cls4{
         border: 0px red solid;
@@ -203,6 +203,6 @@
         box-sizing: border-box;
         font-size: 14px;
    }
-   
+
 
 </style>

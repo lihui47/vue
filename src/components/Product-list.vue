@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <!--网页抬头部分-->
+    <!--网页鉴定网页抬头部分-->
     <div class="top_parent_id1">
       <div id="top_child_id1">
       </div>

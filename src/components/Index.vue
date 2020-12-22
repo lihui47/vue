@@ -1,5 +1,6 @@
 <template>
 <div>
+  <!--主页-->
   <el-container>
     <el-aside width="200px">
       <el-menu
@@ -127,7 +128,7 @@ body > .el-container {
   float: right;
 }
 
-/*控制页面展示大小*/ 
+/*控制页面展示大小*/
     .el-container{
         height: 700px;
     }

@@ -3,27 +3,27 @@
   <!--网页抬头部分-->
   <div id="top_parent_id1">
     <div id="top_child_id1">
-        <img src="../assets/搜索.png" width="30px">     
+        <img src="../assets/搜索.png" width="30px">
     </div>
-    <div id="top_child_id2">      
+    <div id="top_child_id2">
         <span>筛选查询</span>
     </div>
     <div id="top_child_id3">
         <span>模糊条件</span>
         <input type="text" placeholder="请输入品牌名称">
     </div>
-    <div class="top_child_cls4">  
-         <el-button type="info" size="small">查询</el-button>     
+    <div class="top_child_cls4">
+         <el-button type="info" size="small">查询</el-button>
     </div>
-    <div class="top_child_cls4">  
-        <el-button type="info" size="small" @click="insertVisible = true">新增 </el-button>     
+    <div class="top_child_cls4">
+        <el-button type="info" size="small" @click="insertVisible = true">新增 </el-button>
     </div>
   </div>
-  <!--表格部分-->
+  <!--品牌表格部分-->
   <el-table
     :data="tableData"
     border
-    style="width: 100%, margin-top: 30px">
+    style="width: 100%, margin-top:30px">
     <el-table-column
       fixed
       prop="date"
@@ -42,7 +42,7 @@
       label="品牌首字母"
       width="450">
     </el-table-column>
-    
+
     <el-table-column
       fixed="right"
       label="操作"
@@ -109,7 +109,7 @@
         tableData: [{
           date: '1',
           name: '古驰',
-          other: 'GC'  
+          other: 'GC'
         }],
         dialogVisible: false,
         insertVisible:false
@@ -156,7 +156,7 @@
         margin-left: 550px;
         font-size: 14px;
         line-height: 50px;
-      
+
    }
     .top_child_cls4{
         border: 0px red solid;
@@ -168,6 +168,6 @@
         font-size: 14px;
         line-height: 50px;
    }
-   
+
 
 </style>
