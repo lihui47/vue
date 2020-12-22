@@ -41,21 +41,20 @@ export default {
   methods:{
     // 登录方法
     login(){
-      const _this=this;
-      this.$http.get("http://localhost:9090/user/login",{
+      this.$http.get("http://localhost:9999/user/login",{
         params:{
-          username:_this.ruleForm.username,
-          password:_this.ruleForm.password
+          username:this.ruleForm.username,
+          password:this.ruleForm.password
         }
       }).then((resp) => {
         console.log(resp)
-        if(resp.data.code==20000){
+        if(resp.data.code===20000){
           this.$message({
             message: '恭喜你，登陆成功',
             type: 'success'
           });
-        }else if(resp.data.code==20002){
-          _this.$router.push("/register")
+        }else if(resp.data.code===20002){
+          this.$router.push("/register")
         }else{
 
         }

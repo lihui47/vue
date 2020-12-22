@@ -10,10 +10,10 @@
     </div>
     <div id="top_child_id3">
         <span>模糊条件</span>
-        <input type="text" placeholder="请输入品牌名称">
+        <input type="text" placeholder="请输入品牌名称" v-model="checkVO.name">
     </div>
     <div class="top_child_cls4">
-         <el-button type="info" size="small">查询</el-button>
+         <el-button type="info" size="small" @click="query">查询</el-button>
     </div>
     <div class="top_child_cls4">
         <el-button type="info" size="small" @click="insertVisible = true">新增 </el-button>
@@ -22,8 +22,9 @@
   <!--品牌表格部分-->
   <el-table
     :data="tableData"
+    class="tableBox"
     border
-    style="width: 100%, margin-top:30px">
+    style="width:100% ,margin-top:30px">
     <el-table-column
       fixed
       prop="date"
@@ -101,6 +102,21 @@
             done();
           })
           .catch(_ => {});
+      },
+      query(){
+        this.$http.get("http://localhost:9999/brand/queryLikely",{
+          params:{
+            current:this.checkVO.current,
+            sizePage:this.checkVO.sizePage,
+            name:this.checkVO.name
+          }.then(resp=>{
+            if(resp.data.code===20001){
+              console.log("查询失败")
+            }else{
+              this.tableData = resp.data.data
+            }
+          })
+        })
       }
     },
 
@@ -112,7 +128,12 @@
           other: 'GC'
         }],
         dialogVisible: false,
-        insertVisible:false
+        insertVisible:false,
+        checkVO:[{
+          current:1,
+          sizePage:10,
+          name:""
+        }]
       }
     }
   }
@@ -120,7 +141,7 @@
 
 <style>
    #top_parent_id1{
-       border: 0px red solid;
+       border: 0px #ff0000 solid;
        width: 100%;
        height: 50px;
        background-color:whitesmoke;
