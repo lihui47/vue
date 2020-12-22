@@ -16,7 +16,7 @@
           </template>
           <el-menu-item-group>
             <el-menu-item index="1-1"><i class="el-icon-minus" @click="checkStaff"></i>审核用户</el-menu-item>
-            <el-menu-item index="1-2"><i class="el-icon-minus" @click="showStaff"></i>修改用户</el-menu-item>
+            <el-menu-item index="1-2"><i class="el-icon-minus" @click="showStaff"></i>查看用户</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-menu-item index="2">
@@ -41,7 +41,7 @@
             <span>评估鉴定</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="1-1"><i class="el-icon-minus"></i>商品列表</el-menu-item>
+            <el-menu-item index="1-1"><i class="el-icon-minus" @click="showList"></i>商品列表</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>
@@ -84,6 +84,12 @@ export default {
     },
     showStaff(){
      this.$router.push("/index/showStaff");
+    },
+    showAttribute(){
+      this.$router.push("/index/pr");
+    },
+    showList(){
+      this.$router.push("/index/pro");
     }
   }
 }
