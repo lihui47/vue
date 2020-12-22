@@ -32,7 +32,7 @@
             <el-menu-item index="1-1"><i class="el-icon-minus" @click="showFirst"></i>商品大类</el-menu-item>
             <el-menu-item index="1-2"><i class="el-icon-minus" @click="showSecond"></i>商品小类</el-menu-item>
             <el-menu-item index="1-3"><i class="el-icon-minus" @click="showBrand"></i>品牌管理</el-menu-item>
-            <el-menu-item index="1-4"><i class="el-icon-minus"></i>商品属性</el-menu-item>
+            <el-menu-item index="1-4"><i class="el-icon-minus" @click="showAttribute"></i>商品属性</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="4">
@@ -41,7 +41,7 @@
             <span>评估鉴定</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="1-1"><i class="el-icon-minus"></i>商品列表</el-menu-item>
+            <el-menu-item index="1-1"><i class="el-icon-minus" @click="showList"></i>商品列表</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>
@@ -84,6 +84,12 @@ export default {
     },
     showStaff(){
      this.$router.push("/index/showStaff");
+    },
+    showAttribute(){
+      this.$router.push("/index/pr");
+    },
+    showList(){
+      this.$router.push("/index/pro");
     }
   }
 }

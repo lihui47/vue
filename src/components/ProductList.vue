@@ -3,16 +3,18 @@
   <div>
     <!--网页鉴定网页抬头部分-->
     <div class="top_parent_id1">
-      <div id="top_child_id1">
-      </div>
+
 
       <div id="top_child_id2">
         <span>筛选查询</span>
       </div>
 
+      <div class="top_child_cls4">
+        <el-button type="info" size="small" @click="criteria">查询</el-button>
+      </div>
       <div id="xialaikuang">
           <span>状态</span>
-        <select id="u408-input" style="height: 31px">
+        <select id="u408-input" style="height: 31px" v-model="identifity.status">
           <option value="全部">全部</option>
           <option value="待鉴定">待鉴定</option>
           <option value="待评估">待评估</option>
@@ -23,14 +25,14 @@
 
       <div class="top_child_id4">
         <span>操作人</span>
-        <input type="text" style="width: 60px;height: 28px">
+        <input type="text" style="width: 60px;height: 28px" v-model="identifity.writer">
       </div>
 
 
 
       <div class="top_child_id3">
-        <span>模糊条件</span>
-        <input type="text" placeholder="请输入商品大类名称" style="height: 28px">
+        <span>商品名称</span>
+        <input type="text" placeholder="请输入商品名称" style="height: 28px">
       </div>
 
 
@@ -47,13 +49,10 @@
         </div>
       </div>
 
-      <div class="top_child_cls4">
-        <el-button type="info" size="small">查询</el-button>
+      <div id="top_child_id1">
       </div>
+
     </div>
-
-
-
 
     <!--表格-->
     <div id="tables">
@@ -64,7 +63,7 @@
 
         <!--点击新增删除事件-->
         <div id="tables-btn">
-          <el-row>
+          <el-row >
 
             <el-button type="primary">提交</el-button>
             <el-button type="info">新商品</el-button>
@@ -85,37 +84,32 @@
         @selection-change="handleSelectionChange">
 
         <el-table-column
-          prop="number"
+          prop="id"
           label="编号"
-          width="80">
+          width="70">
         </el-table-column>
         <el-table-column
           prop="name"
           label="商品名称"
-          width="250">
+          width="200">
         </el-table-column>
         <el-table-column
           prop="address"
           label="分类"
-          width="250">
+          width="200">
         </el-table-column>
         <el-table-column
-          prop="author"
+          prop="writer"
           label="录入人"
-          width="120">
+          width="200">
         </el-table-column>
         <el-table-column
-          prop="authenticate"
+          prop="identitier"
           label="鉴定人"
-          width="120">
+          width="200">
         </el-table-column>
         <el-table-column
-          prop="assess"
-          label="评估人"
-          width="120">
-        </el-table-column>
-        <el-table-column
-          prop="time"
+          prop="gmt_create"
           label="录入时间"
           show-overflow-tooltip>
         </el-table-column>
@@ -157,15 +151,17 @@
               return {
                 checked: true,
                 tableData: [{
-                  number: '001',
-                  name: '旺仔小馒头',
-                  address: '上海市普陀区金沙江路 1518 弄',
-                  author:"张三",
-                  authenticate:"李四",
-                  assess:"王麻子",
-                  time:"",
-                  status:"启用",
+                  id:'',
+                  writer:'',
+                  identitier:'',
+                  gmt_create:'',
+                  status:'',
+
                 }],
+                identifity:{
+                  status:"",
+                  writer:"",
+                },
 
               }
             },
@@ -175,7 +171,21 @@
          handleSelectionChange(val) {
            this.multipleSelection = val;
          },
-          }
+         criteria(){
+           var _this=this
+           this.$http.post("http://localhost:8888/pro",this.identifity).then(function(resp){
+                console.log(resp)
+                 _this.tableData=resp.data.data
+
+                 console.log(_this.tableData)
+
+           })
+         },
+
+          },
+          created() {
+
+          },
     }
 
 
@@ -183,15 +193,7 @@
 
 <style>
 
-    #Header{
-      background-color:#E4E4E4 ;
-      border: 1px solid ;
-      width: 100%;
-      height: 20%;
-      float: left;
-      margin-top: 0.8%;
 
-    }
     #tables{
 
       border: 0px hotpink solid ;
@@ -257,22 +259,23 @@
      }
 
     .top_parent_id1{
-      border: 0px #ff0e0e solid;
+
       width: 100%;
       height: 50px;
       background-color:whitesmoke;
     }
     #top_child_id1{
-      border: 0px red solid;
+
       width: 30px;
-      height: 30px;
+      height: 50px;
       margin: 10px 0 0 0px;
       float: left;
+      margin-left: 50px;
     }
 
     #xialaikuang{
-      border:0px red solid;
-      width: 100px;
+
+      width: 120px;
       height: 50px;
       float: left;
       box-sizing: border-box;
@@ -282,8 +285,8 @@
     }
 
     #top_child_id2{
-      border: 0px red solid;
-      width: 80px;
+
+      width: 100px;
       height: 50px;
       margin: 0px 0 0 0px;
       float: left;
@@ -293,8 +296,8 @@
       font: 14px;
     }
     .top_child_id3{
-      border:0px red solid;
-      width: 250px;
+
+      width: 260px;
       height: 50px;
       float: left;
       box-sizing: border-box;
@@ -304,19 +307,19 @@
 
     }
     #date{
-      border:0px red solid;
-      width: 500px;
+
+      width: 450px;
       height: 50px;
       float: left;
       box-sizing: border-box;
       padding-top: 4.5px;
-      margin-left: 50px;
+      margin-left: 10px;
       font-size: 14px;
     }
 
     .top_child_id4{
-      border:0px red solid;
-      width: 120px;
+
+      width: 140px;
       height: 50px;
       float: left;
       box-sizing: border-box;
@@ -326,7 +329,7 @@
 
     }
     .top_child_cls4{
-      border: 0px red solid;
+
       width: 80px;
       height: 50px;
       float: left;

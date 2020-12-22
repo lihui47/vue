@@ -8,6 +8,8 @@ import ShowStaff from "../components/ShowStaff";
 import Second from "../components/Second";
 import Brand from "../components/Brand";
 import First from "../components/First";
+import ProductAttribute from "../components/ProductAttribute";
+import ProductList from "../components/ProductList";
 //vue框架引入
 import axios from 'axios';//导入axios
 //导入elementui
@@ -27,6 +29,8 @@ export default new Router({
       path: '/register',
       component:Register
     },
+
+
     {
       path:'/index',
       component:Index,
@@ -35,7 +39,11 @@ export default new Router({
         {path:"second",component:Second},
         {path:"brand",component:Brand},
         {path:'checkStaff',component:CheckStaff},
-        {path:'showStaff',component:ShowStaff}
+        {path:'showStaff',component:ShowStaff},
+        {path:'pr',component:ProductAttribute},
+        {path:'pro',component: ProductList},
+
+
       ]
     }
 
