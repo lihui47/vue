@@ -10,23 +10,23 @@
     </div>
     <div id="top_child_id3">
         <span>模糊条件</span>
-        <input type="text" placeholder="请输入商品大类名称">
+        <input type="text" placeholder="请输入商品大类名称" v-model="likeCheck.name">
     </div>
     <div class="top_child_cls4">  
-         <el-button type="info" size="small">查询</el-button>     
+         <el-button type="info" size="small" @click="likecheck">查询</el-button>     
     </div>
-    <div class="top_child_cls4">  
-        <el-button type="info" size="small" @click="insertVisible = true">新增 </el-button>     
+    <div class="top_child_cls4" >  
+         <el-button @click="personalInfoDialog1 = true"  type="info" size="small">增加</el-button>   
     </div>
   </div>
   <!--表格部分-->
   <el-table
-    :data="tableData"
+    :data="records"
     border
     style="width: 100%, margin-top: 30px">
     <el-table-column
       fixed
-      prop="date"
+      prop="id"
       label="大类编号"
       width="350">
     </el-table-column>
@@ -47,84 +47,191 @@
       fixed="right"
       label="操作"
       width="300">
-      <template >
-        <el-button  size="medium">删除</el-button>
-        <el-button  size="medium"  @click="dialogVisible = true">修改</el-button>
+      <template slot-scope="scope">
+        <el-button  size="medium"  @click="deleteFirstid(scope.$index, records)">删除</el-button>
+        <el-button  size="medium"  @click="getFirstid(scope.$index, records)">修改</el-button>
       </template>
     </el-table-column>
   </el-table>
   <!--分页部分-->
   <div class="block">
     <el-pagination
-      :page-size="100"
+      @current-change="handleCurrentChange"
+      :page-size="3"
       layout="total, prev, pager, next"
-      :total="1000">
+      :total="pages.total">
     </el-pagination>
   </div>
   <!--修改弹出框-->
-  <el-dialog
-    title="修改商品大类"
-    :visible.sync="dialogVisible"
-    width="30%"
-    :before-close="handleClose">
-       <span slot="footer" class="dialog-footer">
-       <el-button @click="dialogVisible = false">取 消</el-button>
-       <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-       </span>
-  </el-dialog>
+ <el-dialog title="修改商品大类信息" :visible.sync="personalInfoDialog2" width="30%"  center>
+      
+          <el-form ref="u"  label-width="80px">
+                <el-form-item label="大类名称">
+                    <el-input type="text" v-model="FirstInfo.name"></el-input>
+                </el-form-item>
+                <el-form-item label="大类描述">
+                    <el-input type="text" v-model="FirstInfo.info"></el-input>
+                </el-form-item>
+              <el-row :gutter="20">
+                  <el-col :span="5" :offset="4">
+                      <el-form-item >
+                          <el-button type="success" @click="changeFirstInfo">提交</el-button>
+                      </el-form-item>
+                  </el-col>
+              </el-row>
+          </el-form>
+    </el-dialog>
+       
   <!--新增弹出框-->
-   <el-dialog
-    title="新增商品大类"
-    :visible.sync="insertVisible "
-    width="30%"
-    :before-close="handleClose">
-    <el-form ref="form" :model="form" label-width="80px">
-       <el-button @click="insertVisible  = false">取 消</el-button>
-       <el-button type="primary" @click="insertVisible  = false">确 定</el-button>
-    </el-form>
-  </el-dialog>
+
+    <el-dialog title="添加商品大类信息" :visible.sync="personalInfoDialog1" width="30%"  center>
+      
+          <el-form ref="u"  label-width="80px">
+                <el-form-item label="大类名称">
+                    <el-input type="text" v-model="FirstInfo.name"></el-input>
+                </el-form-item>
+                <el-form-item label="大类描述">
+                    <el-input type="text" v-model="FirstInfo.info"></el-input>
+                </el-form-item>
+              <el-row :gutter="20">
+                  <el-col :span="5" :offset="5">
+                      <el-form-item >
+                          <el-button type="success"   @click="InsertFirstInfo">提交</el-button>
+                      </el-form-item>
+                  </el-col>
+              </el-row>
+          </el-form>
+    </el-dialog>
 </div>
 </template>
 
 <script>
+import Index from './Index.vue';
   export default {
+  components: { Index },
 
     methods: {
-      handleClick(row) {
-        console.log(row);
+      //删除的方法
+      deleteFirstid(index,records){
+            this.$http.post("http://127.0.0.1:9999/first/deleteFirst",{
+            id:records[index].id,
+         }).then(
+          data=>{
+             console.log(data);
+              location.reload()
+           }
+        );
       },
-      handleClose(done) {
-        this.$confirm('确认关闭？')
-          .then(_ => {
-            done();
-          })
-          .catch(_ => {});
+      //修改的方法
+      getFirstid(index,records){
+        this.personalInfoDialog2=true;
+        console.log(records[index].id);
+        this.FirstInfo.id=records[index].id;
+         
       },
+      changeFirstInfo(){
+         this.$http.post("http://127.0.0.1:9999/first/updataFirst",{
+            id:this.FirstInfo.id,
+            name:this.FirstInfo.name,
+            info:this.FirstInfo.info
+         }).then(
+          data=>{
+             console.log(data);
+             this.personalInfoDialog2=false;
+             location.reload()
+           }
+        );
+      },
+      
+      //分页展示的方法
+      handleCurrentChange(val) {
+            console.log(`当前页: ${val}`);
+            this.pages.sizePage=this.pages.sizePage;
+            this.pages.current=val;
+            this.showFirstInfo();
+        },
+      //模糊查询
+      likecheck(){
+        this.$http.get("http://127.0.0.1:9999/first/likeFirst",
+          {
+            params:{
+                 id:this.likeCheck.id,
+                 name:this.likeCheck.name,
+                 current:this.pages.current,
+                 sizePage:this.pages.sizePage                 
+            }}).then(data=>{
+              console.log(data);
+              if(data.data.data!=null){
+                this.pages.total=data.data.data.total;
+                this.records=data.data.data.records;
+              }else{
+                this.showFirstInfo();
+              }
+              
+            });
+      },
+      //分页查询请求的方法
       showFirstInfo(){
-        var _this=this;
         this.$http.get("http://127.0.0.1:9999/first/queryFirst",
           {
             params:{
-                 
+                 current:this.pages.current,
+                 sizePage:this.pages.sizePage  
             }
-        }).then(function(data){
+        }).then(data=>{
           console.log(data);
+          this.pages.total=data.data.data.total;
+          this.records=data.data.data.records;
         });
+      },
+      //新增大类的方法
+      InsertFirstInfo(){
+        this.$http.post("http://127.0.0.1:9999/first/insertFirst",this.FirstInfo).then(
+          data=>{
+             this.personalInfoDialog1=false
+             location.reload()
+             console.log(data)
+             if(data.data.code==20001){
+               alert(data.data.message)
+             }
+             
+           }
+        );
       }
     },
+    //钩子函数
     created(){
          this.showFirstInfo();
     },
 
     data() {
       return {
-        tableData: [{
-          date: '1',
-          name: '服装类',
-          other: '' 
-        }],
-        dialogVisible: false,
-        insertVisible:false
+         FirstInfo:{
+            id:"",
+            name:"",
+            info:""
+         },
+         //模糊查询对象
+         likeCheck:{
+            id:"",
+            name:""
+         },
+         //分页查询对象
+         pages:{
+            current:1,
+            sizePage: 3,
+            records:[],
+            pages:0,
+            total:0,
+          },
+         //封装的数据对象
+         records: [{
+            id: '',
+            name: '',
+            other: '' 
+          }],
+        personalInfoDialog1:false,
+        personalInfoDialog2:false
       }
     }
   }
