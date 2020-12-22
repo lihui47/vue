@@ -10,7 +10,7 @@
     </div>
     <div id="top_child_id3">
         <span>模糊条件</span>
-        <input type="text" placeholder="请输入品牌名称" v-model="checkVO.name">
+        <input type="text" placeholder="请输入品牌名称" v-model="likeName.name">
     </div>
     <div class="top_child_cls4">
          <el-button type="info" size="small" @click="query">查询</el-button>
@@ -62,7 +62,7 @@
       :current-page.sync="currentPage1"
       :page-size="100"
       layout="total, prev, pager, next"
-      :total="1000">
+      :total="20">
     </el-pagination>
   </div>
   <!--修改弹出框-->
@@ -104,35 +104,50 @@
           .catch(_ => {});
       },
       query(){
-        this.$http.get("http://localhost:9999/brand/queryLikely",{
+        this.$http.get("http://localhost:8888/brand/queryLikely",{
           params:{
-            current:this.checkVO.current,
-            sizePage:this.checkVO.sizePage,
-            name:this.checkVO.name
-          }.then(resp=>{
+            current:this.pages.current,
+            sizePage:this.pages.sizePage,
+            name:this.likeName.name
+          }
+        }).then((resp)=>{
             if(resp.data.code===20001){
-              console.log("查询失败")
+              console.log(resp)
             }else{
-              this.tableData = resp.data.data
+              this.pages.total=resp.data.data.total;
+              this.records=resp.data.data.records;
             }
-          })
+
         })
       }
     },
 
     data() {
       return {
-        tableData: [{
-          date: '1',
-          name: '古驰',
-          other: 'GC'
-        }],
+
+        tableData: {
+          date: '',
+          name: '',
+          other: ''
+        },
+
         dialogVisible: false,
         insertVisible:false,
-        checkVO:[{
+        //分页查询对象
+        pages:{
           current:1,
-          sizePage:10,
+          sizePage: 3,
+          records:[],
+          pages:0,
+          total:0,
+        },
+        likeName:{
           name:""
+        },
+        records: [{
+          id: '',
+          name: '',
+          other: ''
         }]
       }
     }

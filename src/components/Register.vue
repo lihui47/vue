@@ -19,7 +19,7 @@
             <el-col   >
               <el-row >
                 <el-checkbox-group v-model="checkList">
-                  <el-button type="info"  round>立即注册</el-button>
+                  <el-button type="info"  round @click="register">立即注册</el-button>
                 </el-checkbox-group>
               </el-row>
 
@@ -37,6 +37,27 @@
 
 <script>
 export default {
+  methods: {
+    login(){
+      this.$http.get("http://localhost:8888/user/register",this.ruleForm).then((resp) => {
+        console.log(resp)
+        if(resp.data.code===20000){
+          this.$message({
+            message: '恭喜你，注册成功',
+            type: 'success'
+          });
+        }else if(resp.data.code===20002){
+          this.$message({
+            message: '用户已存在',
+            type: 'fail'
+          });
+        }else{
+
+        }
+
+      })
+    }
+  },
   data() {
     return {
       ruleForm: {

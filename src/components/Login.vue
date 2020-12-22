@@ -41,7 +41,8 @@ export default {
   methods:{
     // 登录方法
     login(){
-      this.$http.get("http://localhost:9999/user/login",{
+      console.log(this.ruleForm.username)
+      this.$http.get("http://localhost:8888/user/login",{
         params:{
           username:this.ruleForm.username,
           password:this.ruleForm.password
@@ -60,7 +61,6 @@ export default {
         }
 
       })
-
     }
   },
   data() {
