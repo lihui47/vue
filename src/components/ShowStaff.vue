@@ -2,11 +2,11 @@
 <div>
   <!--用户展示-->
   <el-breadcrumb separator-class="el-icon-arrow-right">
-    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+    <el-breadcrumb-item :to="{ path: '/index' }">首页</el-breadcrumb-item>
     <el-breadcrumb-item>用户管理</el-breadcrumb-item>
     <el-breadcrumb-item>查看用户</el-breadcrumb-item>
   </el-breadcrumb>
-    <div >
+    <div style="margin-top: 20px;margin-bottom: 20px" >
         <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
           <el-select v-model="select" slot="prepend" placeholder="请选择">
             <el-option label="状态" value="1"></el-option>
@@ -25,7 +25,7 @@
       fixed
       prop="id"
       label="编号"
-      width="200">
+      width="265">
     </el-table-column>
     <el-table-column
       prop="username"
