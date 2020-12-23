@@ -40,6 +40,7 @@
       width="300px">
 
     </el-table-column>
+
     <el-table-column
       fixed="right"
       label="操作"
@@ -128,11 +129,22 @@ export default {
     },
   created() {
     const _this=this;
-    this.$http.get("http://localhost:9090/check/showCheck"
+    this.$http.get("http://localhost:8888/check/showCheck"
     ).then((resp) => {
       _this.tableData=resp.data.data;
 
     })
+  },
+  watch(){
+    const aa=this.input3;
+    if(aa==null){
+      const _this=this;
+      this.$http.get("http://localhost:8888/check/showCheck"
+      ).then((resp) => {
+        _this.tableData=resp.data.data;
+
+      })
+    }
   },
   data() {
     return {

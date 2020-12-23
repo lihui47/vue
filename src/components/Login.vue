@@ -11,7 +11,7 @@
       <el-col offset="2" :span="18" >
   <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
     <el-form-item label="用户名" prop="name"  >
-      <el-input v-model="ruleForm.name" placeholder="请输入用户名" ></el-input>
+      <el-input v-model="ruleForm.username" placeholder="请输入用户名" ></el-input>
     </el-form-item>
     <el-form-item label="密码" prop="password" >
       <el-input v-model="ruleForm.password" placeholder="请输入密码" show-password ></el-input>
@@ -41,38 +41,39 @@ export default {
   methods:{
     // 登录方法
     login(){
-      const _this=this;
-      this.$http.get("http://localhost:9090/user/login",{
+      console.log(this.ruleForm.username)
+      this.$http.get("http://localhost:8888/user/login",{
         params:{
-          username:_this.ruleForm.username,
-          password:_this.ruleForm.password
+          username:this.ruleForm.username,
+          password:this.ruleForm.password
         }
       }).then((resp) => {
         console.log(resp)
-        if(resp.data.code==20000){
+        if(resp.data.code===20000){
           this.$message({
             message: '恭喜你，登陆成功',
             type: 'success'
           });
-        }else if(resp.data.code==20002){
-          _this.$router.push("/register")
+          this.$router.push("index")
+        }else if(resp.data.code===20002){
+          this.$message.error('用户名或密码错误');
+          this.$router.push("register")
         }else{
-
+          this.$router.push("login")
         }
 
       })
-
     }
   },
   data() {
     return {
       ruleForm: {
-        name: '',
+        username: '',
         password: ''
       },
       checkList: ['选中且禁用','记住密码 | '],
       rules: {
-        name: [
+        username: [
           {required: true, message: '请输入用户名', trigger: 'blur'},
           {min: 3, max: 8, message: '长度在 3 到 8个字符', trigger: 'blur'},
         ],

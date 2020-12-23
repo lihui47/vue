@@ -23,7 +23,7 @@
   <el-table
     :data="tableData"
     border
-    style="width: 100%, margin-top:30px">
+    style="width: 100%; margin-top:30px">
     <el-table-column
       fixed
       prop="date"
