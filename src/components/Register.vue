@@ -11,7 +11,7 @@
         <el-col offset="2" :span="18" >
           <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
             <el-form-item label="用户名" prop="name"  >
-              <el-input v-model="ruleForm.name" placeholder="请输入用户名" ></el-input>
+              <el-input v-model="ruleForm.username" placeholder="请输入用户名" ></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="password" >
               <el-input v-model="ruleForm.password" placeholder="请输入密码" show-password ></el-input>
@@ -38,18 +38,19 @@
 <script>
 export default {
   methods: {
-    login(){
-      this.$http.get("http://localhost:8888/user/register",this.ruleForm).then((resp) => {
+    register(){
+      this.$http.post("http://localhost:8888/user/register",this.ruleForm).then(resp=> {
         console.log(resp)
         if(resp.data.code===20000){
           this.$message({
             message: '恭喜你，注册成功',
             type: 'success'
           });
-        }else if(resp.data.code===20002){
+
+        }else if(resp.data.code===20004){
           this.$message({
             message: '用户已存在',
-            type: 'fail'
+            type: 'warning'
           });
         }else{
 
@@ -66,7 +67,7 @@ export default {
       },
       checkList: ['选中且禁用','记住密码 | '],
       rules: {
-        name: [
+        username: [
           {required: true, message: '请输入用户名', trigger: 'blur'},
           {min: 3, max: 8, message: '长度在 3 到 8个字符', trigger: 'blur'},
         ],
