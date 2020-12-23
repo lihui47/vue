@@ -86,10 +86,10 @@ export default {
      this.$router.push("/index/showStaff");
     },
     showAttribute(){
-      this.$router.push("/index/pr");
+      this.$router.push("/index/productAttribute");
     },
     showList(){
-      this.$router.push("/index/pro");
+      this.$router.push("/index/productList");
     }
   }
 }

@@ -10,6 +10,7 @@ import Brand from "../components/Brand";
 import First from "../components/First";
 import ProductAttribute from "../components/ProductAttribute";
 import ProductList from "../components/ProductList";
+import updeteIdentifity from "../components/updeteIdentifity";
 //vue框架引入
 import axios from 'axios';//导入axios
 //导入elementui
@@ -18,6 +19,12 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.prototype.$http=axios;
 Vue.use(Router);
+const routerPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return routerPush.call(this, location).catch(error=> error)
+}
+
+
 Vue.use(ElementUI);
 export default new Router({
   routes: [
@@ -29,6 +36,7 @@ export default new Router({
       path: '/register',
       component:Register
     },
+    {path:'/UI',component:updeteIdentifity },
 
 
     {
@@ -40,8 +48,8 @@ export default new Router({
         {path:"brand",component:Brand},
         {path:'checkStaff',component:CheckStaff},
         {path:'showStaff',component:ShowStaff},
-        {path:'pr',component:ProductAttribute},
-        {path:'pro',component: ProductList},
+        {path:'productAttribute',component:ProductAttribute},
+        {path:'productList',component: ProductList},
 
 
       ]
