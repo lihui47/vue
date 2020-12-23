@@ -10,6 +10,8 @@ import Brand from "../components/Brand";
 import First from "../components/First";
 import ProductAttribute from "../components/ProductAttribute";
 import ProductList from "../components/ProductList";
+import WareHouse from "../components/WareHouse";
+import GoIndentify from "../components/GoIndentify";
 import updeteIdentifity from "../components/updeteIdentifity";
 //vue框架引入
 import axios from 'axios';//导入axios
@@ -36,7 +38,6 @@ export default new Router({
       path: '/register',
       component:Register
     },
-    {path:'/UI',component:updeteIdentifity },
 
 
     {
@@ -50,8 +51,8 @@ export default new Router({
         {path:'showStaff',component:ShowStaff},
         {path:'productAttribute',component:ProductAttribute},
         {path:'productList',component: ProductList},
-
-
+        {path:'wareHouse',component: WareHouse},
+        {path:'goIndentify',component: GoIndentify},
       ]
     }
 

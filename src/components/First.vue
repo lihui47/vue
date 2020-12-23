@@ -5,18 +5,18 @@
     <div id="top_child_id1">
          <img src="../assets/搜索.png" width="30px">
     </div>
-    <div id="top_child_id2">      
+    <div id="top_child_id2">
         <span>筛选查询</span>
     </div>
     <div id="top_child_id3">
         <span>模糊条件</span>
         <input type="text" placeholder="请输入商品大类名称" v-model="likeCheck.name">
     </div>
-    <div class="top_child_cls4">  
-         <el-button type="info" size="small" @click="likecheck">查询</el-button>     
+    <div class="top_child_cls4">
+         <el-button type="info" size="small" @click="likecheck">查询</el-button>
     </div>
-    <div class="top_child_cls4" >  
-         <el-button @click="personalInfoDialog1 = true"  type="info" size="small">增加</el-button>   
+    <div class="top_child_cls4" >
+         <el-button @click="personalInfoDialog1 = true"  type="info" size="small">增加</el-button>
     </div>
   </div>
   <!--表格部分-->
@@ -42,7 +42,7 @@
       label="备注"
       width="450">
     </el-table-column>
-    
+
     <el-table-column
       fixed="right"
       label="操作"
@@ -64,7 +64,7 @@
   </div>
   <!--修改弹出框-->
  <el-dialog title="修改商品大类信息" :visible.sync="personalInfoDialog2" width="30%"  center>
-      
+
           <el-form ref="u"  label-width="80px">
                 <el-form-item label="大类名称">
                     <el-input type="text" v-model="FirstInfo.name"></el-input>
@@ -81,11 +81,11 @@
               </el-row>
           </el-form>
     </el-dialog>
-       
+
   <!--新增弹出框-->
 
     <el-dialog title="添加商品大类信息" :visible.sync="personalInfoDialog1" width="30%"  center>
-      
+
           <el-form ref="u"  label-width="80px">
                 <el-form-item label="大类名称">
                     <el-input type="text" v-model="FirstInfo.name"></el-input>
@@ -113,7 +113,7 @@ import Index from './Index.vue';
     methods: {
       //删除的方法
       deleteFirstid(index,records){
-            this.$http.post("http://127.0.0.1:9999/first/deleteFirst",{
+            this.$http.post("http://127.0.0.1:8888/first/deleteFirst",{
             id:records[index].id,
          }).then(
           data=>{
@@ -127,10 +127,10 @@ import Index from './Index.vue';
         this.personalInfoDialog2=true;
         console.log(records[index].id);
         this.FirstInfo.id=records[index].id;
-         
+
       },
       changeFirstInfo(){
-         this.$http.post("http://127.0.0.1:9999/first/updataFirst",{
+         this.$http.post("http://127.0.0.1:8888/first/updataFirst",{
             id:this.FirstInfo.id,
             name:this.FirstInfo.name,
             info:this.FirstInfo.info
@@ -142,7 +142,7 @@ import Index from './Index.vue';
            }
         );
       },
-      
+
       //分页展示的方法
       handleCurrentChange(val) {
             console.log(`当前页: ${val}`);
@@ -152,13 +152,13 @@ import Index from './Index.vue';
         },
       //模糊查询
       likecheck(){
-        this.$http.get("http://127.0.0.1:9999/first/likeFirst",
+        this.$http.get("http://127.0.0.1:8888/first/likeFirst",
           {
             params:{
                  id:this.likeCheck.id,
                  name:this.likeCheck.name,
                  current:this.pages.current,
-                 sizePage:this.pages.sizePage                 
+                 sizePage:this.pages.sizePage
             }}).then(data=>{
               console.log(data);
               if(data.data.data!=null){
@@ -167,16 +167,16 @@ import Index from './Index.vue';
               }else{
                 this.showFirstInfo();
               }
-              
+
             });
       },
       //分页查询请求的方法
       showFirstInfo(){
-        this.$http.get("http://127.0.0.1:9999/first/queryFirst",
+        this.$http.get("http://127.0.0.1:8888/first/queryFirst",
           {
             params:{
                  current:this.pages.current,
-                 sizePage:this.pages.sizePage  
+                 sizePage:this.pages.sizePage
             }
         }).then(data=>{
           console.log(data);
@@ -186,7 +186,7 @@ import Index from './Index.vue';
       },
       //新增大类的方法
       InsertFirstInfo(){
-        this.$http.post("http://127.0.0.1:9999/first/insertFirst",this.FirstInfo).then(
+        this.$http.post("http://127.0.0.1:8888/first/insertFirst",this.FirstInfo).then(
           data=>{
              this.personalInfoDialog1=false
              location.reload()
@@ -194,7 +194,7 @@ import Index from './Index.vue';
              if(data.data.code==20001){
                alert(data.data.message)
              }
-             
+
            }
         );
       }
@@ -228,7 +228,7 @@ import Index from './Index.vue';
          records: [{
             id: '',
             name: '',
-            other: '' 
+            other: ''
           }],
         personalInfoDialog1:false,
         personalInfoDialog2:false
@@ -275,7 +275,7 @@ import Index from './Index.vue';
         margin-left: 550px;
         font-size: 14px;
         line-height: 50px;
-      
+
    }
     .top_child_cls4{
         border: 0px red solid;
@@ -287,6 +287,6 @@ import Index from './Index.vue';
         font-size: 14px;
         line-height: 50px;
    }
-   
+
 
 </style>

@@ -19,20 +19,30 @@
             <el-menu-item index="1-2"><i class="el-icon-minus" @click="showStaff"></i>查看用户</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
-        <el-menu-item index="2">
-          <i class="el-icon-s-home"></i>
-          <span slot="title">仓库管理</span>
-        </el-menu-item>
+<!--        <el-menu-item index="2">-->
+<!--          <i class="el-icon-s-home"></i>-->
+<!--          <span slot="title">仓库管理</span>-->
+
+<!--        </el-menu-item>-->
+        <el-submenu index="2">
+          <template slot="title">
+            <i class="el-icon-s-home"></i>
+            <span>仓库管理</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item index="1-1"><i class="el-icon-minus" @click="wareHouse"></i>仓库配置</el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
         <el-submenu index="3">
           <template slot="title">
             <i class="el-icon-setting"></i>
             <span>商品配置</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="1-1"><i class="el-icon-minus" @click="showFirst"></i>商品大类</el-menu-item>
-            <el-menu-item index="1-2"><i class="el-icon-minus" @click="showSecond"></i>商品小类</el-menu-item>
-            <el-menu-item index="1-3"><i class="el-icon-minus" @click="showBrand"></i>品牌管理</el-menu-item>
-            <el-menu-item index="1-4"><i class="el-icon-minus" @click="showAttribute"></i>商品属性</el-menu-item>
+            <el-menu-item index="1-1" @click="showFirst"><i class="el-icon-minus" ></i>商品大类</el-menu-item>
+            <el-menu-item index="1-2" @click="showSecond"><i class="el-icon-minus" ></i>商品小类</el-menu-item>
+            <el-menu-item index="1-3" @click="showBrand"><i class="el-icon-minus" ></i>品牌管理</el-menu-item>
+            <el-menu-item index="1-4"><i class="el-icon-minus"></i>商品属性</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="4">
@@ -90,6 +100,10 @@ export default {
     },
     showList(){
       this.$router.push("/index/productList");
+      this.$router.push("/index/pro");
+    },
+    wareHouse(){
+      this.$router.push("/index/wareHouse");
     }
   }
 }

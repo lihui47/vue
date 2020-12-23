@@ -2,11 +2,11 @@
 
 <div>
   <el-breadcrumb separator-class="el-icon-arrow-right">
-    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+    <el-breadcrumb-item :to="{ path: '/index' }">首页</el-breadcrumb-item>
     <el-breadcrumb-item>用户管理</el-breadcrumb-item>
     <el-breadcrumb-item>审核用户</el-breadcrumb-item>
   </el-breadcrumb>
-  <div >
+  <div style="margin-top: 20px;margin-bottom: 20px">
 
       <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
         <el-select v-model="select" slot="prepend" placeholder="请选择">
@@ -27,7 +27,7 @@
       fixed
       prop="id"
       label="编号"
-      width="200px">
+      width="265px">
     </el-table-column>
     <el-table-column
       prop="username"
@@ -40,6 +40,7 @@
       width="300px">
 
     </el-table-column>
+
     <el-table-column
       fixed="right"
       label="操作"
@@ -124,15 +125,41 @@ export default {
 
         }
       });
+    },
+    showAll(){
+      const _this=this;
+      this.$http.get("http://localhost:8888/check/showCheck"
+      ).then((resp) => {
+        _this.tableData=resp.data.data;
+
+      })
     }
     },
-  created() {
-    const _this=this;
-    this.$http.get("http://localhost:9090/check/showCheck"
-    ).then((resp) => {
-      _this.tableData=resp.data.data;
 
-    })
+  created() {
+    this.showAll();
+  },
+  // watch(){
+  //   const aa=this.input3;
+  //   if(aa==null){
+  //     const _this=this;
+  //     this.$http.get("http://localhost:8888/check/showCheck"
+  //     ).then((resp) => {
+  //       _this.tableData=resp.data.data;
+  //
+  //     })
+  //   }
+  // },
+  //监听方法
+  watch:{
+    input3:{
+      handler(){
+        if(this.input3==''){
+          this.showAll();
+        }
+      },
+      deep:true
+    }
   },
   data() {
     return {
