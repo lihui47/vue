@@ -97,9 +97,9 @@
           width="120">
         </el-table-column>
         <el-table-column
-          prop="gmt_create"
-          label="录入时间"
-          width="200">
+          prop="price"
+          label="价格"
+          width="196">
         </el-table-column>
         <el-table-column
           prop="status"
@@ -114,7 +114,7 @@
 
             <el-button  size="medium"  type="danger">鉴定</el-button>
             <el-button  size="medium"  @click="deletep(scope.$index, tableData)">删除</el-button>
-            <el-button  size="medium"   @click="updetetIdentitier">修改</el-button>
+            <el-button  size="medium"   @click="updetetIdentitier(scope.$index, tableData)">修改</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -149,6 +149,7 @@
                   gmt_create:'',
                   sname:'',
                   status:'',
+                  price:'',
                 }],
 
                 //分页查询对象
@@ -194,7 +195,7 @@
          //         });
          //       },
 
-
+          //删除
          deletep(index,tableData){
                this.$http.post("http://localhost:8888/identifity/deletepro",{
                id:tableData[index].id,
@@ -206,9 +207,14 @@
            );
          },
 
+
+
          //跳转到修改页面
-         updetetIdentitier(){
+         updetetIdentitier(index,tableData){
+          const id=tableData[index].id;
+           sessionStorage.setItem("id",id);
            this.$router.push("/index/UI");
+
          },
 
 
@@ -246,7 +252,7 @@
 
 
          },
-
+         //展示全部
          showAll(){
           const _this=this
            this.$http.get("http://localhost:8888/identifity/test",{
