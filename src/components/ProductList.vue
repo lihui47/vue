@@ -112,7 +112,7 @@
           width="300">
           <template slot-scope="scope" >
 
-            <el-button  size="medium"  type="danger">鉴定</el-button>
+            <el-button  size="medium"  type="danger" @click="goidentify(scope.$index, tableData)">鉴定</el-button>
             <el-button  size="medium"  @click="deletep(scope.$index, tableData)">删除</el-button>
             <el-button  size="medium"   @click="updetetIdentitier">修改</el-button>
           </template>
@@ -259,11 +259,24 @@
               _this.tableData=resp.data.data.records
               _this.pages=resp.data.data
            })
+         },
+         //鉴定的方法
+         goidentify(row,rows){
+           const goId=rows[row].id;
+           //将商品id存入session
+           sessionStorage.setItem("goId",goId);
+           const pname=rows[row].name;
+           sessionStorage.setItem("pname",pname);
+           const pwriter=rows[row].writer;
+           sessionStorage.setItem("pwriter",pwriter);
+           const ssname=rows[row].sname;
+           sessionStorage.setItem("ssname",ssname);
+            
+            //跳转到鉴定界面
+           this.$router.push("/index/goIndentify");
          }
 
        },
-
-
          created(){
           this.showAll();
 
