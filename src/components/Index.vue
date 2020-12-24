@@ -42,7 +42,7 @@
             <el-menu-item index="1-1" @click="showFirst"><i class="el-icon-minus" ></i>商品大类</el-menu-item>
             <el-menu-item index="1-2" @click="showSecond"><i class="el-icon-minus" ></i>商品小类</el-menu-item>
             <el-menu-item index="1-3" @click="showBrand"><i class="el-icon-minus" ></i>品牌管理</el-menu-item>
-            <el-menu-item index="1-4"><i class="el-icon-minus"></i>商品属性</el-menu-item>
+            <el-menu-item index="1-4" @click="showProductAttribute"><i class="el-icon-minus"></i>商品属性</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="4">
@@ -103,6 +103,9 @@ export default {
     },
     wareHouse(){
       this.$router.push("/index/wareHouse");
+    },
+    showProductAttribute(){
+      this.$router.push("/index/pr");
     }
   }
 }

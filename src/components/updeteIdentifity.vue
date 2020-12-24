@@ -7,15 +7,11 @@
         <el-form-item label="编号" prop="id">
           <el-input v-model="ruleForm.id" :disabled="true"></el-input>
         </el-form-item>
-        <el-form-item label="提交人" prop="person">
-          <el-input v-model="ruleForm.person" :disabled="true"></el-input>
-        </el-form-item>
-
-        <el-form-item label="提交时间" prop="data">
-          <el-input v-model="ruleForm.data" :disabled="true"></el-input>
+        <el-form-item label="鉴定人" prop="person">
+          <el-input v-model="ruleForm.identitier" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="商品分类" prop="type1">
-          <el-input v-model="ruleForm.type1" :disabled="true"></el-input>
+          <el-input v-model="ruleForm.sname" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="商品名称" prop="name">
           <el-input v-model="ruleForm.name" :disabled="true"></el-input>
@@ -24,11 +20,11 @@
           <el-input v-model="ruleForm.brand" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="客户首买价" prop="originPrice">
-          <el-input v-model="ruleForm.originPrice" :disabled="true"></el-input>
+          <el-input v-model="ruleForm.price" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="新旧程度">
-          <el-input v-model="ruleForm.old" ></el-input>
-          <el-select v-model="ruleForm.old" placeholder="请选择产品新旧程度">
+          <el-input v-model="ruleForm.newold" ></el-input>
+          <el-select v-model="ruleForm.newold" placeholder="请选择产品新旧程度">
             <el-option label="9层新" value="9层新"></el-option>
             <el-option label="7层新" value="7层新"></el-option>
             <el-option label="5层新" value="5层新"></el-option>
@@ -37,12 +33,12 @@
           </el-select>
         </el-form-item>
         <el-form-item label="鉴定结果" prop="resource">
-          <el-radio-group v-model="ruleForm.resource">
+          <el-radio-group v-model="ruleForm.indentifyresult">
             <el-radio label="鉴定为正品" value="正品"></el-radio>
             <el-radio label="鉴定为假货" value="假货"></el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="典当价" prop="indentify_price">
+        <el-form-item label="鉴定价格" prop="indentify_price">
           <el-input v-model="ruleForm.indentify_price"></el-input>
         </el-form-item>
         <el-form-item>
@@ -68,7 +64,14 @@ export default {
         delivery: false,
         type: [],
         resource: '',
-        indentify_price: ''
+        indentify_price: '',
+        newold:'',
+        indentifyresult:'',
+        identitier:'',
+        sname:'',
+        
+        
+        
       },
       rules: {
         name: [
@@ -120,16 +123,29 @@ export default {
           console.log(resp)
         })
     },
-
-    created(){
-
-
-
+    //查询数据
+    queryll(){
+      const id=sessionStorage.getItem("id");
+      console.log("获取到的ID",id);
+      this.$http.get("http://localhost:8888/identifity/queryident",{
+        params:{
+          id:id
+        }
+      }).then((resp)=>{
+          console.log(resp)
+      })
 
     },
+  
 
 
-  }
+  },
+  created(){
+    this.queryll();
+  
+  
+  
+  },
 
 
 }
