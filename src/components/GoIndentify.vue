@@ -125,7 +125,6 @@ export default {
     this.ruleForm.writer=sessionStorage.getItem("pwriter");
     this.ruleForm.type1=sessionStorage.getItem("ssname");
     this.ruleForm.price=sessionStorage.getItem("pprice");
-    sessionStorage.setItem("user","tom");
     this.ruleForm.identitier=sessionStorage.getItem("user");
   }
 
