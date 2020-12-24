@@ -49,8 +49,10 @@ export default {
 
         }else if(resp.data.code===20004){
           this.$message({
+            showClose: true,
             message: '用户已存在',
-            type: 'warning'
+            center:true,
+            type: 'error'
           });
         }else{
 

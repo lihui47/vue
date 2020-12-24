@@ -20,7 +20,7 @@ Vue.prototype.$http=axios;
 Vue.use(Router);
 Vue.use(ElementUI);
 
-export default new Router({
+const router = new Router({
   mode:'history',
   routes: [
     {
@@ -31,8 +31,6 @@ export default new Router({
       path: '/register',
       component:Register
     },
-
-
     {
       path:'/index',
       component:Index,
@@ -50,4 +48,25 @@ export default new Router({
     }
 
   ]
-})
+});
+//导航守卫
+// 使用 router.beforeEach 注册一个全局前置守卫，判断用户是否登陆
+router.beforeEach((to, from, next) => {
+  //debugger
+  if (to.path === '/login') {
+    next();
+  }
+  else if(to.path === '/register'){
+    next();
+  }
+  else {
+    let token = sessionStorage.getItem('Authorization');
+    if (!token) {
+      next('/login');
+    } else {
+      next();
+    }
+  }
+});
+export default router;
+
