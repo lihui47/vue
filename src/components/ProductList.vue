@@ -265,6 +265,22 @@
               _this.tableData=resp.data.data.records
               _this.pages=resp.data.data
            })
+         },
+         //鉴定的方法
+         goidentify(row,rows){
+           const goId=rows[row].id;
+           //将商品id存入session
+           sessionStorage.setItem("goId",goId);
+           const pname=rows[row].name;
+           sessionStorage.setItem("pname",pname);
+           const pwriter=rows[row].writer;
+           sessionStorage.setItem("pwriter",pwriter);
+           const ssname=rows[row].sname;
+           sessionStorage.setItem("ssname",ssname);
+           const pprice=rows[row].price;
+           sessionStorage.setItem("pprice",pprice);
+            //跳转到鉴定界面
+           this.$router.push("/index/goIndentify");
          }
 
        },
