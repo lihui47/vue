@@ -220,7 +220,16 @@ export default {
       },
        //新增商品的方法
       InsertSecondInfo(){
-        this.$http.post("http://127.0.0.1:8888/productAttr/insertproductAttr",this.ProductInfo).then(
+        this.$http.post("http://127.0.0.1:8888/productAttr/insertproductAttr",{
+          id:this.ProductInfo.id,
+          name:this.ProductInfo.name,
+          secondName:this.ProductInfo.secondName,
+          number:this.ProductInfo.number,
+          price:this.ProductInfo.price,
+          status:this.ProductInfo.status,
+          statusName:this.ProductInfo.statusName,
+          userName:sessionStorage.getItem("user")
+        }).then(
           data=>{
              this.personalInfoDialog1=false
              location.reload()
