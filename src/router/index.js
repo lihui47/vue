@@ -53,6 +53,7 @@ export default new Router({
         {path:'productList',component: ProductList},
         {path:'wareHouse',component: WareHouse},
         {path:'goIndentify',component: GoIndentify},
+        {path:'UI',component: updeteIdentifity},
       ]
     }
 

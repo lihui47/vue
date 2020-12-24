@@ -100,7 +100,6 @@ export default {
     },
     showList(){
       this.$router.push("/index/productList");
-      this.$router.push("/index/pro");
     },
     wareHouse(){
       this.$router.push("/index/wareHouse");

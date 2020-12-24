@@ -63,8 +63,8 @@ export default {
         id:"1",
         name: '',
         old: '',
-        date1: '',
-        date2: '',
+        originPrice: '',
+        brand: '',
         delivery: false,
         type: [],
         resource: '',
@@ -112,7 +112,23 @@ export default {
     },
     goBack(){
       this.$router.push("/index/productList");
-    }
+    },
+
+    //更新数据
+    submitForm(){
+        this.$http("http://localhost:8888/identifity/test").then((resp)=>{
+          console.log(resp)
+        })
+    },
+
+    created(){
+
+
+
+
+    },
+
+
   }
 
 

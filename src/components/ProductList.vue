@@ -14,7 +14,7 @@
           <span>状态</span>
         <select id="u408-input" style="height: 31px" v-model="tableData.status">
           <option value="待鉴定">待鉴定</option>
-          <option value="待评估">已鉴定</option>
+          <option value="已鉴定">已鉴定</option>
         </select>
       </div>
 
@@ -99,7 +99,7 @@
         <el-table-column
           prop="gmt_create"
           label="录入时间"
-          width="197">
+          width="200">
         </el-table-column>
         <el-table-column
           prop="status"
@@ -153,8 +153,8 @@
 
                 //分页查询对象
                 pages:{
-                  current:1,
-                  sizePage:3,
+                  current: 1,
+                  sizePage: 3,
                   tableData:[],
                   pages:0,
                   total:0,
@@ -208,25 +208,29 @@
 
          //跳转到修改页面
          updetetIdentitier(){
-           this.$router.push("/UI");
+           this.$router.push("/index/UI");
          },
 
 
          //分页展示的方法
-         handleCurrentChange(val) {
-               console.log(`当前页: ${val}`);
-               this.pages.sizePage=this.pages.sizePage;
-               this.pages.current=val;
+         handleCurrentChange(val){
+               console.log(`当前页: ${val}`),
+               console.log(val),
+               console.log()
+               this.pages.sizePage=3,
+               console.log(this.pages.sizePage)
+               this.pages.current=val,
+               console.log(this.pages.current)
                this.showAll();
            },
 
         //条件查询
          criteria(){
-           var _this=this
+           const _this=this
            this.$http.get("http://localhost:8888/identifity/pro",{
              params:{
-               current:this.pages.current,
                sizePage:this.pages.sizePage,
+               current:this.pages.current,
                name:this.tableData.name,
                identitier:this.tableData.identitier,
                gmt_create:this.tableData.gmt_create,
@@ -235,9 +239,8 @@
              }
            }).then(function(resp){
              console.log(resp)
-             _this.tableData=resp.data.data
-
-             console.log(_this.tableData)
+            _this.tableData=resp.data.data.records
+            _this.pages=resp.data.data
 
            })
 
