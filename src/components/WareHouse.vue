@@ -46,20 +46,20 @@
         fixed
         prop="tel"
         label="联系电话"
-        width="150">
+        width="200">
       </el-table-column>
       <el-table-column
         fixed
         prop="address"
         label="仓库地址"
-        width="150">
+        width="200">
       </el-table-column>
-      <el-table-column
-        fixed
-        prop="associatemouse"
-        label="关联仓库"
-        width="150">
-      </el-table-column>
+<!--      <el-table-column-->
+<!--        fixed-->
+<!--        prop="associatemouse"-->
+<!--        label="关联仓库"-->
+<!--        width="150">-->
+<!--      </el-table-column>-->
       <el-table-column
         fixed
         prop="status"
@@ -102,9 +102,9 @@
         <el-form-item label="仓库地址">
           <el-input type="text" v-model="warehouseInfo.address">{warehouseInfo.address}</el-input>
         </el-form-item>
-        <el-form-item label="关联门店">
-          <el-input type="text" v-model="warehouseInfo.associatemouse">{warehouseInfo.associatemouse}</el-input>
-        </el-form-item>
+<!--        <el-form-item label="关联门店">-->
+<!--          <el-input type="text" v-model="warehouseInfo.associatemouse">{warehouseInfo.associatemouse}</el-input>-->
+<!--        </el-form-item>-->
         <el-form-item label="状态">
           <el-input type="text" v-model="warehouseInfo.status">{warehouseInfo.status}</el-input>
         </el-form-item>
@@ -124,20 +124,20 @@
 
       <el-form ref="u"  label-width="80px">
         <el-form-item label="仓库名称">
-          <el-input type="text" v-model="warehouseInfo.name" @blur="blur" ></el-input>
+          <el-input type="text" v-model="warehouseInfo.name" >{}</el-input>
         </el-form-item>
         <el-form-item label="负责人">
-          <el-input type="text" v-model="warehouseInfo.manager" @blur="blur"></el-input>
+          <el-input type="text" v-model="warehouseInfo.manager"></el-input>
         </el-form-item>
         <el-form-item label="联系方式">
-          <el-input type="text" v-model="warehouseInfo.tel" @blur="blur"></el-input>
+          <el-input type="text" v-model="warehouseInfo.tel" ></el-input>
         </el-form-item>
         <el-form-item label="仓库地址">
           <el-input type="text" v-model="warehouseInfo.address"></el-input>
         </el-form-item>
-        <el-form-item label="关联门店">
-          <el-input type="text" v-model="warehouseInfo.associatemouse"></el-input>
-        </el-form-item>
+<!--        <el-form-item label="关联门店">-->
+<!--          <el-input type="text" v-model="warehouseInfo.associatemouse"></el-input>-->
+<!--        </el-form-item>-->
         <el-form-item label="状态">
           <el-input type="text" v-model="warehouseInfo.status"></el-input>
         </el-form-item>
