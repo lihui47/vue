@@ -105,7 +105,7 @@ export default {
       this.$router.push("/index/wareHouse");
     },
     showProductAttribute(){
-      this.$router.push("/index/pr");
+      this.$router.push("/index/productAttribute");
     }
   }
 }
