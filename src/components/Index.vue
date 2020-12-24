@@ -96,10 +96,10 @@ export default {
      this.$router.push("/index/showStaff");
     },
     showAttribute(){
-      this.$router.push("/index/pr");
+      this.$router.push("/index/productAttribute");
     },
     showList(){
-      this.$router.push("/index/pro");
+      this.$router.push("/index/productList");
     },
     wareHouse(){
       this.$router.push("/index/wareHouse");
@@ -131,7 +131,7 @@ export default {
   background-color: #E9EEF3;
   color: #333;
   text-align: center;
-  line-height: 20px !important;
+  line-height: 160px;
   max-height: 800px;
 }
 
