@@ -2,11 +2,11 @@
 <div>
   <!--用户展示-->
   <el-breadcrumb separator-class="el-icon-arrow-right">
-    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+    <el-breadcrumb-item :to="{ path: '/index' }">首页</el-breadcrumb-item>
     <el-breadcrumb-item>用户管理</el-breadcrumb-item>
     <el-breadcrumb-item>查看用户</el-breadcrumb-item>
   </el-breadcrumb>
-    <div >
+    <div style="margin-top: 20px;margin-bottom: 20px" >
         <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
           <el-select v-model="select" slot="prepend" placeholder="请选择">
             <el-option label="状态" value="1"></el-option>
@@ -25,7 +25,7 @@
       fixed
       prop="id"
       label="编号"
-      width="200">
+      width="265">
     </el-table-column>
     <el-table-column
       prop="username"
@@ -43,9 +43,10 @@
       width="400">
       <template slot-scope="scope">
         <el-button @click="delete11(scope.$index, scope.row,tableData)" size="small" type="primary" icon="el-icon-delete" :plain="true">删除</el-button>
-        <el-button @click="write(scope.row)" type="primary" icon="el-icon-edit" circle ></el-button>
+        <el-button @click="write(scope.row)"  icon="el-icon-edit"  ></el-button>
       </template>
     </el-table-column>
+
   </el-table>
 
   <el-pagination
@@ -64,18 +65,18 @@
 <script>
 export default {
   methods: {
-    //模糊查询
-    search(select,input3){
-      const _this=this
-      this.$http.get("http://localhost:8888/check/blurSelect",{
-          params:{
-            select:select,
-            input3:input3
+    //模糊查询n
+    search(select, input3) {
+      const _this = this
+      this.$http.get("http://localhost:8888/check/blurSelect", {
+          params: {
+            select: select,
+            input3: input3
           }
         }
       ).then((resp) => {
 
-        _this.tableData=resp.data.data;
+        _this.tableData = resp.data.data;
 
       })
 
@@ -83,23 +84,23 @@ export default {
     },
     //分页查询
     handleSizeChange(val) {
-      this.findAll(val,this.tableData.current)
+      this.findAll(val, this.tableData.current)
     },
     handleCurrentChange(val) {
-      this.findAll(this.tableData.size,val)
+      this.findAll(this.tableData.size, val)
     },
-    findAll(size,current){
+    findAll(size, current) {
       console.log(size)
-      const _this=this
-      this.$http.get("http://localhost:8888/check/AllUser",{
-        params:{
-          size:size,
-          current:current
+      const _this = this
+      this.$http.get("http://localhost:8888/check/AllUser", {
+        params: {
+          size: size,
+          current: current
         }
-      }).then((resp)=>{
+      }).then((resp) => {
         console.log(resp.data.data)
-        _this.tableData=resp.data.data
-        _this.tableData.records=resp.data.data.records
+        _this.tableData = resp.data.data
+        _this.tableData.records = resp.data.data.records
       })
     },
     //删除操作
@@ -111,7 +112,7 @@ export default {
         callback: action => {
           this.$http.get("http://localhost:8888/check/deleteUser", {
               params: {
-                id:row.id
+                id: row.id
               }
             }
           ).then((resp) => {
@@ -125,36 +126,49 @@ export default {
           })
         }
       })
-    }
     },
-  //编辑
-  write(row) {
-        this.$confirm('此操作是禁用用户操作, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
 
+    //编辑
+    write(row) {
+      this.$confirm('此操作是禁用用户操作, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+
+        this.$http.get("http://localhost:8888/check/prevent", {
+            params: {
+              id: row.id
+            }
+          }
+        ).then((resp) => {
+          //rows.splice(index, 1);
+          location.reload("/index/showStaff")
           this.$message({
-            type: 'success',
-            message: '禁用成功!'
+            message: '删除成功',
+            type: 'success'
           });
+
         }).catch(() => {
           this.$message({
             type: 'info',
             message: '已取消操作'
           });
         });
-    },
+      });
+    }
+  } ,
+
 
     data() {
       return {
         tableData: {
-            records:[],//城市数据
+            records:[],//用户数据
             size: 3,//每页记录数
             pages: "",//总页数
             current: 1,//当前页数
             total:""//总条数
+
         },
         input3: '',
         select: '',
@@ -167,6 +181,7 @@ export default {
   created() {
     this.findAll(this.tableData.size,this.tableData.current);
   }
+
 
 }
 </script>
