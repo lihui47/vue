@@ -17,7 +17,7 @@
       <el-input v-model="ruleForm.name">{ruleForm.name}</el-input>
     </el-form-item>
     <el-form-item label="客户首买价" prop="price">
-      <el-input v-model="ruleForm.price"></el-input>
+      <el-input v-model="ruleForm.price">{ruleForm.price}</el-input>
     </el-form-item>
     <el-form-item label="新旧程度">
       <el-select v-model="ruleForm.oldnew" placeholder="请选择产品新旧程度">
@@ -34,8 +34,8 @@
         <el-radio label="鉴定为假货" value="假货"></el-radio>
       </el-radio-group>
     </el-form-item>
-    <el-form-item label="鉴定价" prop="indentify_price">
-      <el-input v-model="ruleForm.indentify_price"></el-input>
+    <el-form-item label="鉴定价" prop="identify_price">
+      <el-input v-model="ruleForm.identify_price"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="submitForm('ruleForm')">鉴定</el-button>
@@ -55,13 +55,13 @@ export default {
         id:'',
         name: '',
         writer: '',
-        indentitier:'',
+        identitier:'',
         type1:'',
         price:'',
         oldnew:'',
         indentifyresult:'',
-        indentify_price:''
-
+        identify_price:'',
+        status:''
 
       },
       rules: {
@@ -89,8 +89,19 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          console.log(this.ruleForm);
-          alert('鉴定成功!');
+          this.$http.get("http://127.0.0.1:8888/go/addIndentify",{
+            params:{
+              id:this.ruleForm.id,
+              identitier:this.ruleForm.identitier,
+              identify_price:this.ruleForm.identify_price,
+              oldnew:this.ruleForm.oldnew,
+              indentifyresult:this.ruleForm.indentifyresult,
+              status:'已鉴定',
+            }
+          }).then(
+            alert('鉴定成功!'),
+            this.$router.push("/index/productList")
+          );
         } else {
           alert('数据不能为空!!');
           return false;
@@ -99,6 +110,8 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
+      //this.ruleForm.oldnew='', this.ruleForm.indentifyresult='',
+        //this.ruleForm.identify_price=''
     },
     goBack() {
       this.$router.push("/index/pro");
@@ -106,10 +119,14 @@ export default {
 
   },
   created(){
+
     this.ruleForm.id=sessionStorage.getItem("goId");
     this.ruleForm.name=sessionStorage.getItem("pname");
     this.ruleForm.writer=sessionStorage.getItem("pwriter");
     this.ruleForm.type1=sessionStorage.getItem("ssname");
+    this.ruleForm.price=sessionStorage.getItem("pprice");
+    sessionStorage.setItem("user","tom");
+    this.ruleForm.identitier=sessionStorage.getItem("user");
   }
 
 

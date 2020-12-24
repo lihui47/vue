@@ -85,6 +85,12 @@
           prop="sname"
           label="分类"
           width="210">
+
+        </el-table-column>
+        <el-table-column
+          prop="price"
+          label="首买价"
+          width="196">
         </el-table-column>
         <el-table-column
           prop="writer"
@@ -96,11 +102,7 @@
           label="鉴定人"
           width="120">
         </el-table-column>
-        <el-table-column
-          prop="price"
-          label="价格"
-          width="196">
-        </el-table-column>
+
         <el-table-column
           prop="status"
           label="状态"
@@ -277,7 +279,8 @@
            sessionStorage.setItem("pwriter",pwriter);
            const ssname=rows[row].sname;
            sessionStorage.setItem("ssname",ssname);
-            
+           const pprice=rows[row].price;
+           sessionStorage.setItem("pprice",pprice);
             //跳转到鉴定界面
            this.$router.push("/index/goIndentify");
          }
