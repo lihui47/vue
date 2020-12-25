@@ -115,7 +115,7 @@ export default {
               type: 'info',
               message: `已通过`
             });
-
+            location.reload()
           })
 
         }

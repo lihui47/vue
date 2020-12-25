@@ -161,7 +161,7 @@ export default {
   methods: {
     //删除的方法
     deleteFirstid(index,records){
-      alert(records[index].id)
+
       this.$http.post("http://127.0.0.1:8888/warehouse/deleteHouse",{
         id:records[index].id,
       }).then(
@@ -185,6 +185,7 @@ export default {
       this.warehouseInfo.status=records[index].status;
     },
     changeFirstInfo(){
+
       this.$http.post("http://127.0.0.1:8888/warehouse/updateHouse",
         // id:this.warehouseInfo.id,
         // name:this.warehouseInfo.name,
