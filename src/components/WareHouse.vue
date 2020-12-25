@@ -120,7 +120,7 @@
 
     <!--新增弹出框-->
 
-    <el-dialog title="添加商品大类信息" :visible.sync="personalInfoDialog1" width="30%"  center>
+    <el-dialog title="新增仓库信息" :visible.sync="personalInfoDialog1" width="30%"  center>
 
       <el-form ref="u"  label-width="80px">
         <el-form-item label="仓库名称">
@@ -185,7 +185,6 @@ export default {
       this.warehouseInfo.status=records[index].status;
     },
     changeFirstInfo(){
-      alert("sdsaa")
       this.$http.post("http://127.0.0.1:8888/warehouse/updateHouse",
         // id:this.warehouseInfo.id,
         // name:this.warehouseInfo.name,
@@ -193,9 +192,9 @@ export default {
         this.warehouseInfo
       ).then(
         data=>{
+          this.$message.success('修改成功'),
           console.log(data);
           this.personalInfoDialog2=false;
-
           location.reload()
         }
       );
@@ -278,7 +277,6 @@ export default {
     likeCheck:{
       handler(){
         if(this.likeCheck.name==""){
-          console.log("sadas")
           this.showFirstInfo();
         }
       },

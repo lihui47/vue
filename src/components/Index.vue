@@ -103,7 +103,7 @@ export default {
     //   this.$router.push("/index/pr");
     // },
     showMenu(){
-      this.$http.post("")
+      this.$http.post("/")
     },
     userOut(){
       this.$router.push("/login");
