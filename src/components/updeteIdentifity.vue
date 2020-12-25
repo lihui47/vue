@@ -5,25 +5,25 @@
     <el-col :span="8" offset="8">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="编号" prop="id">
-          <el-input v-model="ruleForm.id" :disabled="true"></el-input>
+          <el-input v-model="ruleForm.id" :disabled="true">{ruleForm.id}</el-input>
         </el-form-item>
-        <el-form-item label="鉴定人" prop="person">
-          <el-input v-model="ruleForm.identitier" :disabled="true"></el-input>
+        <el-form-item label="鉴定人" prop="identitier">
+          <el-input v-model="ruleForm.identitier" >{ruleForm.identitier}</el-input>
         </el-form-item>
-        <el-form-item label="商品分类" prop="type1">
-          <el-input v-model="ruleForm.sname" :disabled="true"></el-input>
+        <el-form-item label="商品分类" prop="sname">
+          <el-input v-model="ruleForm.sname" :disabled="true">{ruleForm.sname}</el-input>
         </el-form-item>
         <el-form-item label="商品名称" prop="name">
-          <el-input v-model="ruleForm.name" :disabled="true"></el-input>
+          <el-input v-model="ruleForm.name" ></el-input>
         </el-form-item>
         <el-form-item label="商品品牌" prop="brand">
           <el-input v-model="ruleForm.brand" :disabled="true"></el-input>
         </el-form-item>
-        <el-form-item label="客户首买价" prop="originPrice">
+        <el-form-item label="客户首买价" prop="price">
           <el-input v-model="ruleForm.price" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="新旧程度">
-          <el-input v-model="ruleForm.newold" ></el-input>
+          <el-input v-model="ruleForm.newold" >{ruleForm.newold}</el-input>
           <el-select v-model="ruleForm.newold" placeholder="请选择产品新旧程度">
             <el-option label="9层新" value="9层新"></el-option>
             <el-option label="7层新" value="7层新"></el-option>
@@ -32,14 +32,14 @@
             <el-option label="全新" value="全新"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="鉴定结果" prop="resource">
+        <el-form-item label="鉴定结果" prop="indentifyresult">
           <el-radio-group v-model="ruleForm.indentifyresult">
             <el-radio label="鉴定为正品" value="正品"></el-radio>
             <el-radio label="鉴定为假货" value="假货"></el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="鉴定价格" prop="indentify_price">
-          <el-input v-model="ruleForm.indentify_price"></el-input>
+        <el-form-item label="鉴定价格" prop="identify_price">
+          <el-input v-model="ruleForm.identify_price">{ruleForm.identify_price}</el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')">立即修改</el-button>
@@ -55,23 +55,17 @@ export default {
 
   data() {
     return {
-      ruleForm: {
-        id:"1",
+      ruleForm:{
+        id:'',
         name: '',
-        old: '',
-        originPrice: '',
+        price: '',
         brand: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        indentify_price: '',
+        identify_price: '',
         newold:'',
         indentifyresult:'',
         identitier:'',
         sname:'',
-        
-        
-        
+        status:''
       },
       rules: {
         name: [
@@ -119,12 +113,33 @@ export default {
 
     //更新数据
     submitForm(){
-        this.$http("http://localhost:8888/identifity/test").then((resp)=>{
+        console.log('2345',this.ruleForm);
+       const user=sessionStorage.getItem('user');
+       const id=sessionStorage.getItem("id");
+        this.$http.get("http://localhost:8888/identifity/updateIden",{
+          params:{
+            id:id,
+            identitier: user,
+            identify_price:this.ruleForm.identify_price,
+            newold:this.ruleForm.newold,
+            indentifyresult:this.ruleForm.indentifyresult,
+
+          }
+        }).then((resp)=>{
           console.log(resp)
+          if(resp.data.code==20000){
+             alert(resp.data.message)
+             this.$router.push("/index/productList");
+
+          }else{
+            alert(resp.data.message)
+            this.$router.push("/index/UI");
+          }
         })
     },
     //查询数据
     queryll(){
+      const _this=this
       const id=sessionStorage.getItem("id");
       console.log("获取到的ID",id);
       this.$http.get("http://localhost:8888/identifity/queryident",{
@@ -132,19 +147,21 @@ export default {
           id:id
         }
       }).then((resp)=>{
-          console.log(resp)
+          console.log(resp,'cv')
+          _this.ruleForm=resp.data.data
+          console.log("sdf",_this.ruleForm)
       })
 
     },
-  
+
 
 
   },
   created(){
     this.queryll();
-  
-  
-  
+
+
+
   },
 
 

@@ -85,12 +85,6 @@
           prop="sname"
           label="分类"
           width="210">
-
-        </el-table-column>
-        <el-table-column
-          prop="price"
-          label="首买价"
-          width="196">
         </el-table-column>
         <el-table-column
           prop="writer"
@@ -102,7 +96,11 @@
           label="鉴定人"
           width="120">
         </el-table-column>
-
+        <el-table-column
+          prop="price"
+          label="价格"
+          width="196">
+        </el-table-column>
         <el-table-column
           prop="status"
           label="状态"
@@ -114,9 +112,9 @@
           width="300">
           <template slot-scope="scope" >
 
-            <el-button  size="medium"  type="danger" @click="goidentify(scope.$index, tableData)">鉴定</el-button>
-            <el-button  size="medium"  @click="deletep(scope.$index, tableData)">删除</el-button>
-            <el-button  size="medium"   @click="updetetIdentitier(scope.$index, tableData)">修改</el-button>
+            <el-button  :disabled="scope.row.status =='已鉴定'?true:false" size="medium"  type="danger">鉴定</el-button>
+            <el-button    size="medium"  @click="deletep(scope.$index, tableData)">删除</el-button>
+            <el-button  :disabled="scope.row.status =='待鉴定'?true:false" size="medium"   @click="updetetIdentitier(scope.$index, tableData)">修改</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -286,6 +284,8 @@
          }
 
        },
+
+
          created(){
           this.showAll();
 
