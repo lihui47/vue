@@ -107,7 +107,7 @@ export default {
     },
     userOut(){
       this.$router.push("/login");
-      this.$router.push("/index/productAttribute");
+      // this.$router.push("/index/productAttribute");
     }
   },
   created() {
