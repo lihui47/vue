@@ -43,8 +43,9 @@ export default {
     ...mapMutations(['changeLogin']),
     // 登录方法
     login(){
-      this.$http.post("http://localhost:8888/user/login",this.ruleForm).then((resp) => {
+      this.$http.post("http://localhost:8888/user/login",this.ruleForm).then(resp => {
         console.log(resp)
+        localStorage.setItem("user",JSON.stringify(this.ruleForm))
         if(resp.data.code===20000){
           this.$message({
             message: '恭喜你，登陆成功',
