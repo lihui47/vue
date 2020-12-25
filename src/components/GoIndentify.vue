@@ -99,7 +99,7 @@ export default {
               status:'已鉴定',
             }
           }).then(
-            this.$message.error('鉴定成功'),
+            this.$message.success('鉴定成功'),
             this.$router.push("/index/productList")
           );
         } else {
