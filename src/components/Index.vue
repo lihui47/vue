@@ -96,9 +96,9 @@ export default {
     wareHouse(){
       this.$router.push("/index/wareHouse");
     },
-    // showProductAttribute(){
-    //   this.$router.push("/index/pr");
-    // },
+    showAttribute(){
+      this.$router.push("/index/productAttribute");
+    },
     showMenu(){
       this.$http.post("")
     },

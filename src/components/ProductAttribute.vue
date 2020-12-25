@@ -228,7 +228,7 @@ export default {
           price:this.ProductInfo.price,
           status:this.ProductInfo.status,
           statusName:this.ProductInfo.statusName,
-          userName:sessionStorage.getItem("user")
+          userName:JSON.parse(localStorage.getItem("user")).username
         }).then(
           data=>{
              this.personalInfoDialog1=false
