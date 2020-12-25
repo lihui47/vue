@@ -8,16 +8,13 @@
           <el-input v-model="ruleForm[0].id" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="鉴定人" prop="identitier">
-          <el-input v-model="ruleForm[0].identitier" ></el-input>
+          <el-input v-model="ruleForm[0].identitier" :disabled="true" ></el-input>
         </el-form-item>
         <el-form-item label="商品分类" prop="sname">
           <el-input v-model="ruleForm[0].sname" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="商品名称" prop="name">
-          <el-input v-model="ruleForm[0].name" ></el-input>
-        </el-form-item>
-        <el-form-item label="商品品牌" prop="brand">
-          <el-input v-model="ruleForm[0].brand" :disabled="true"></el-input>
+          <el-input v-model="ruleForm[0].name" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="客户首买价" prop="price">
           <el-input v-model="ruleForm[0].price" :disabled="true"></el-input>
@@ -113,15 +110,18 @@ export default {
 
     //更新数据
     submitForm(){
-        console.log('2345',this.ruleForm);
-       const user=sessionStorage.getItem('user');
+
+       //const user=sessionStorage.getItem("user");
        const id=sessionStorage.getItem("id");
+       const user=JSON.parse(localStorage.getItem("user"))
+       console.log(id,"sesion的id");
+       console.log(user,"asdfdd");
         this.$http.get("http://localhost:8888/identifity/updateIden",{
           params:{
             id:id,
-            identitier: user,
-            identify_price:this.ruleForm[0].identify_price,
-            newold:this.ruleForm[0].newold,
+            identitier: user.username,
+            identify_price:this.ruleForm[0].iprice,
+            newold:this.ruleForm[0].oldnew,
             indentifyresult:this.ruleForm[0].indentifyresult,
 
           }
