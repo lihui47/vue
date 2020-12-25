@@ -56,7 +56,7 @@
       </el-table-column>
       <el-table-column
         fixed
-        prop="statusName"
+        prop="status"
         label="状态"
         width="200">
       </el-table-column>

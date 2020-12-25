@@ -40,6 +40,8 @@ const router = new Router({
       path: '/register',
       component:Register
     },
+
+
     {
       path:'/index',
       component:Index,
