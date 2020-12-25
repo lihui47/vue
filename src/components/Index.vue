@@ -61,10 +61,10 @@
       广沣共享典当管理平台
         <el-dropdown class="drown">
           <span class="el-dropdown-link">
-    欢迎您,{{user.username}}<i class="el-icon-arrow-down el-icon--right"></i>
+    欢迎您!  {{this.user.username}}<i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>注销</el-dropdown-item>
+            <el-dropdown-item ><a @click="userOut">注销</a></el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
@@ -105,12 +105,23 @@ export default {
       this.$router.push("/index/wareHouse");
     },
     showProductAttribute(){
+      this.$router.push("/index/pr");
+    },
+    showMenu(){
+      this.$http.post("")
+
+    },
+    userOut(){
+      this.$router.push("/login");
       this.$router.push("/index/productAttribute");
     }
   },
+  created() {
+    this.showMenu();
+  },
   data(){
     return{
-      user:JSON.parse(sessionStorage.getItem('user'))
+      user:JSON.parse(localStorage.getItem("user"))
     }
   }
 }
@@ -136,7 +147,7 @@ export default {
   background-color: #E9EEF3;
   color: #333;
   text-align: center;
-  line-height: 160px;
+  line-height: 30px !important;
   max-height: 800px;
 }
 
