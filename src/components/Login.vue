@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="bg">
   <!--登录页面-->
   <el-col :span="8" offset="8">
     <h1>广沣共享典当管理平台</h1><br/>
@@ -44,13 +44,9 @@ export default {
     // 登录方法
     login(){
       this.$http.post("http://localhost:8888/user/login",this.ruleForm).then(resp => {
-        console.log(resp)
         localStorage.setItem("user",JSON.stringify(this.ruleForm))
+        console.log(resp)
         if(resp.data.code===20000){
-          this.$message({
-            message: '恭喜你，登陆成功',
-            type: 'success'
-          });
           this.Token=resp.data.data
           // 将用户token保存到vuex中
           this.changeLogin({ Authorization: this.Token });
@@ -58,7 +54,11 @@ export default {
         }else if(resp.data.code===20003){
           this.$message.error('用户不存在');
           this.$router.push("register")
-        }else if(resp.data.code===20002){
+        }else if(resp.data.code===20004){
+          this.$message.error('该用户还没有审核');
+          this.$router.push("login")
+        }
+        else if(resp.data.code===20002){
           this.$message.error('密码错误');
           this.$router.push("login")
         }else{
@@ -91,5 +91,8 @@ export default {
 </script>
 
 <style scoped>
-
+.bg{
+  background-size: 100% 100%;
+  background-image: url("../assets/背景图.jpg");
+}
 </style>

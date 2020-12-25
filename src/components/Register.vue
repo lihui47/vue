@@ -46,7 +46,7 @@ export default {
             message: '恭喜你，注册成功',
             type: 'success'
           });
-
+          this.$router.push("/login")
         }else if(resp.data.code===20004){
           this.$message({
             showClose: true,
