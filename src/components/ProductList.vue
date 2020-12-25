@@ -57,6 +57,7 @@
       <div id="top_parent_id2">
           <div id="tables-1" >
               <span>数据列表</span>
+                <el-button    size="medium"  @click="queryAllInfo">查看全部</el-button>
           </div>
 
 
@@ -281,7 +282,14 @@
            sessionStorage.setItem("pprice",pprice);
             //跳转到鉴定界面
            this.$router.push("/index/goIndentify");
+         },
+         //查看全部
+         queryAllInfo(){
+           this.showAll();
          }
+
+
+
 
        },
 
