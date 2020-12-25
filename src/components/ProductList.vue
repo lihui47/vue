@@ -112,7 +112,7 @@
           width="300">
           <template slot-scope="scope" >
 
-            <el-button  :disabled="scope.row.status =='已鉴定'?true:false" size="medium"  type="danger">鉴定</el-button>
+            <el-button  :disabled="scope.row.status =='已鉴定'?true:false" size="medium"  type="danger" @click="goidentify(scope.$index, tableData)">鉴定</el-button>
             <el-button    size="medium"  @click="deletep(scope.$index, tableData)">删除</el-button>
             <el-button  :disabled="scope.row.status =='待鉴定'?true:false" size="medium"   @click="updetetIdentitier(scope.$index, tableData)">修改</el-button>
           </template>
@@ -268,6 +268,7 @@
          },
          //鉴定的方法
          goidentify(row,rows){
+
            const goId=rows[row].id;
            //将商品id存入session
            sessionStorage.setItem("goId",goId);
