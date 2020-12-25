@@ -4,8 +4,8 @@
     </el-page-header>
     <el-col :span="8" offset="8">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="编号" prop="id">
-          <el-input v-model="ruleForm.id" :disabled="true"></el-input>
+        <el-form-item label="编号" prop="id" >
+          <el-input v-model="this.ruleForm[0].id" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="鉴定人" prop="person">
           <el-input v-model="ruleForm.identitier" :disabled="true"></el-input>
@@ -56,7 +56,7 @@ export default {
   data() {
     return {
       ruleForm: {
-        id:"1",
+        id:"",
         name: '',
         old: '',
         originPrice: '',
@@ -69,9 +69,9 @@ export default {
         indentifyresult:'',
         identitier:'',
         sname:'',
-        
-        
-        
+
+
+
       },
       rules: {
         name: [
@@ -120,7 +120,7 @@ export default {
     //更新数据
     submitForm(){
         this.$http("http://localhost:8888/identifity/test").then((resp)=>{
-          console.log(resp)
+          // console.log(resp)
         })
     },
     //查询数据
@@ -131,20 +131,20 @@ export default {
         params:{
           id:id
         }
-      }).then((resp)=>{
-          console.log(resp)
+      }).then((data)=>{
+          console.log(data)
+          this.ruleForm=data.data.data;
+          this.ruleForm.id=this.ruleForm[0].id;
+          console.log(this.ruleForm[0].id);
       })
 
     },
-  
+
 
 
   },
   created(){
     this.queryll();
-  
-  
-  
   },
 
 

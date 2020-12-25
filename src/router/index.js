@@ -29,6 +29,9 @@ Router.prototype.push = function push(location) {
 
 Vue.use(ElementUI);
 export default new Router({
+  model:{
+    history
+  },
   routes: [
     {
       path: '/login',
