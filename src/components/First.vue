@@ -48,8 +48,8 @@
       label="操作"
       width="300">
       <template slot-scope="scope">
-        <el-button  size="medium"  @click="deleteFirstid(scope.$index, tableData)">删除</el-button>
-        <el-button  size="medium"  @click="getFirstid(scope.$index, tableData)">修改</el-button>
+        <el-button  size="medium"  @click="deleteFirstid(scope.$index, records)">删除</el-button>
+        <el-button  size="medium"  @click="getFirstid(scope.$index, records)">修改</el-button>
       </template>
     </el-table-column>
   </el-table>
