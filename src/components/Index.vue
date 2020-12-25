@@ -9,7 +9,7 @@
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#ffd04b">
-        <el-submenu index="1">
+        <el-submenu index="1" v-show="this.permission">
           <template slot="title">
             <i class="el-icon-s-custom"></i>
             <span>用户管理</span>
@@ -95,9 +95,6 @@ export default {
     showStaff(){
      this.$router.push("/index/showStaff");
     },
-    showAttribute(){
-      this.$router.push("/index/productAttribute");
-    },
     showList(){
       this.$router.push("/index/productList");
     },
@@ -107,21 +104,33 @@ export default {
     showProductAttribute(){
       this.$router.push("/index/pr");
     },
-    showMenu(){
-      this.$http.post("")
-
-    },
     userOut(){
+      window.sessionStorage.clear()
       this.$router.push("/login");
-      this.$router.push("/index/productAttribute");
+    },
+    queryPer(){
+      this.$http.get("http://localhost:8888/permission/queryPermission",{
+        params:{
+          username:this.user.username
+        }
+      }).then(resp=>{
+        console.log(resp)
+        if(resp.data.code===20000) {
+          this.len = resp.data.data.length
+          if (this.len === 10) {
+            this.permission = true;
+          }
+        }
+      })
     }
   },
   created() {
-    this.showMenu();
+    this.queryPer();
   },
   data(){
     return{
-      user:JSON.parse(localStorage.getItem("user"))
+      user:JSON.parse(localStorage.getItem("user")),
+      permission:false
     }
   }
 }
