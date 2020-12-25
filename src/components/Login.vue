@@ -37,31 +37,34 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
 export default {
   methods:{
+    ...mapMutations(['changeLogin']),
     // 登录方法
     login(){
-      console.log(this.ruleForm.username)
-      this.$http.get("http://localhost:8888/user/login",{
-        params:{
-          username:this.ruleForm.username,
-          password:this.ruleForm.password
-        }
-      }).then((resp) => {
+      this.$http.post("http://localhost:8888/user/login",this.ruleForm).then(resp => {
         console.log(resp)
+        localStorage.setItem("user",JSON.stringify(this.ruleForm))
         if(resp.data.code===20000){
           this.$message({
             message: '恭喜你，登陆成功',
             type: 'success'
           });
-          this.$router.push("index")
-        }else if(resp.data.code===20002){
-          this.$message.error('用户名或密码错误');
+          this.Token=resp.data.data
+          // 将用户token保存到vuex中
+          this.changeLogin({ Authorization: this.Token });
+          this.$router.push("/index")
+        }else if(resp.data.code===20003){
+          this.$message.error('用户不存在');
           this.$router.push("register")
+        }else if(resp.data.code===20002){
+          this.$message.error('密码错误');
+          this.$router.push("login")
         }else{
+          this.$message.error('输入有误');
           this.$router.push("login")
         }
-
       })
     }
   },
