@@ -39,7 +39,7 @@
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="submitForm('ruleForm')">鉴定</el-button>
-      <el-button @click="resetForm('ruleForm')">重置</el-button>
+      <el-button @click="resetForm('ruleForm')">取消</el-button>
     </el-form-item>
   </el-form>
   </el-col>
@@ -99,7 +99,7 @@ export default {
               status:'已鉴定',
             }
           }).then(
-            alert('鉴定成功!'),
+            this.$message.success('鉴定成功'),
             this.$router.push("/index/productList")
           );
         } else {
@@ -112,9 +112,10 @@ export default {
       this.$refs[formName].resetFields();
       //this.ruleForm.oldnew='', this.ruleForm.indentifyresult='',
         //this.ruleForm.identify_price=''
+      this.$router.push("/index/productList");
     },
     goBack() {
-      this.$router.push("/index/pro");
+      this.$router.push("/index/productList");
     },
 
   },
@@ -125,7 +126,9 @@ export default {
     this.ruleForm.writer=sessionStorage.getItem("pwriter");
     this.ruleForm.type1=sessionStorage.getItem("ssname");
     this.ruleForm.price=sessionStorage.getItem("pprice");
-    this.ruleForm.identitier=sessionStorage.getItem("user");
+
+    const user=JSON.parse(localStorage.getItem("user"))
+    this.ruleForm.identitier=user.username;
   }
 
 

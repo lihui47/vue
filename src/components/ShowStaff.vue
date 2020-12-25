@@ -75,8 +75,8 @@ export default {
           }
         }
       ).then((resp) => {
-
-        _this.tableData = resp.data.data;
+        console.log(resp.data.data)
+        _this.tableData.records = resp.data.data;
 
       })
 
@@ -180,7 +180,18 @@ export default {
     },
   created() {
     this.findAll(this.tableData.size,this.tableData.current);
-  }
+  },
+  //监听方法
+  watch:{
+    input3:{
+      handler(){
+        if(this.input3==''){
+          this.findAll(this.tableData.size,this.tableData.current);
+        }
+      },
+      deep:true
+    }
+  },
 
 
 }

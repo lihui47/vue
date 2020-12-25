@@ -57,6 +57,7 @@
       <div id="top_parent_id2">
           <div id="tables-1" >
               <span>数据列表</span>
+                <el-button    size="medium"  @click="queryAllInfo">查看全部</el-button>
           </div>
 
 
@@ -82,6 +83,11 @@
           width="200">
         </el-table-column>
         <el-table-column
+          prop="price"
+          label="价格"
+          width="196">
+        </el-table-column>
+        <el-table-column
           prop="sname"
           label="分类"
           width="210">
@@ -96,11 +102,7 @@
           label="鉴定人"
           width="120">
         </el-table-column>
-        <el-table-column
-          prop="price"
-          label="价格"
-          width="196">
-        </el-table-column>
+
         <el-table-column
           prop="status"
           label="状态"
@@ -112,7 +114,7 @@
           width="300">
           <template slot-scope="scope" >
 
-            <el-button  :disabled="scope.row.status =='已鉴定'?true:false" size="medium"  type="danger">鉴定</el-button>
+            <el-button  :disabled="scope.row.status =='已鉴定'?true:false" size="medium"  type="danger" @click="goidentify(scope.$index, tableData)">鉴定</el-button>
             <el-button    size="medium"  @click="deletep(scope.$index, tableData)">删除</el-button>
             <el-button  :disabled="scope.row.status =='待鉴定'?true:false" size="medium"   @click="updetetIdentitier(scope.$index, tableData)">修改</el-button>
           </template>
@@ -268,6 +270,7 @@
          },
          //鉴定的方法
          goidentify(row,rows){
+
            const goId=rows[row].id;
            //将商品id存入session
            sessionStorage.setItem("goId",goId);
@@ -281,7 +284,14 @@
            sessionStorage.setItem("pprice",pprice);
             //跳转到鉴定界面
            this.$router.push("/index/goIndentify");
+         },
+         //查看全部
+         queryAllInfo(){
+           this.showAll();
          }
+
+
+
 
        },
 
